@@ -1,8 +1,7 @@
 # Astronomica-interferometry
 In this pipeline we perform radio interferomic data processing carrying out all the phases: rebinning, calibrationa and imaging. It is computed using the serverless architecture [Lithops](https://github.com/lithops-cloud/lithops).
 
-
-<img src="https://github.com/iAmJK44/serverless_benchmarks/assets/97289591/dfa12fa1-97f7-4cf7-b90c-cdff4f526e04"  width="900" height="450">
+<img src="https://github.com/iAmJK44/serverless_benchmarks/assets/97289591/321e8834-e178-462e-a6a8-956de05c8d3a"  width="900" height="450">
 
 ## Prerequisites
 To execute this notebook you need:
