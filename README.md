@@ -19,7 +19,7 @@ This repository contains a summary of serverless benchmarks and pipelines design
 |     [*Astronomica-interferometry*](#9-astronomica-interferometry)    |     Radio interferometric data processing.     |  [SB205.MS SB206.MS SB207.MS SB208.MS SB209.MS SB210.MS](https://share.obspm.fr/s/ezBfciEfmSs7Tqd?path=%2FDATA)        |  5.5 GB each sample    |
 
 
-In some cases there's a link to an external repository containing the code while others can be found here.
+In most cases there's a link to an external repository containing the code while others can be found here.
 
 All workflows utilize [Lithops](https://lithops.cloud) to easily deploy and run code on any major Cloud serverless platform.
 
