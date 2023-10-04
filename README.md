@@ -10,7 +10,7 @@ This repository contains a summary of serverless benchmarks and pipelines design
 |     [*Hyperparameter tunning*](#3-hyperparameter-tunning-with-grid-search)     |     Hyperparameter tuning using grid search algorithm.     |    Amazon customer reviews ([link](https://www.kaggle.com/bittlingmayer/amazonreviews))      |     516.93 MB     |
 |     **Geospatial**     |          |          |          |
 |     [*NDVI*](#4-ndvi-calculation)     |     Calculate NDVI from Object Storage images.     |   Sentinel2 satellite image from the [AWS Sentinel2 open data repository](https://registry.opendata.aws/sentinel-2/)      |          |
-|     [*Model creation from LiDAR pre-processing*](#5-lidar-partitioner--copc)     |     Create terrain models using LiDAR partitioner.     |     [laz files](https://www.icgc.cat/es/Descargas/Elevaciones/Datos-lidar)     |     431 MB     |
+|     [*Model creation from LiDAR pre-processing*](#5-model-creation-from-lidar-preprocessing)     |     Create terrain models using LiDAR partitioner.     |     [laz files](https://www.icgc.cat/es/Descargas/Elevaciones/Datos-lidar)     |     431 MB     |
 |     **Metabolomics**     |          |          |          |
 |     [*METASPACE*](#7-metaspace)     |      Run the METASPACE metabolite annotation pipeline on cloud resources.     |     Examples of datasets and databases in the link below     |          |
 |      **Genomics**    |          |          |          |
