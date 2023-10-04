@@ -25,6 +25,8 @@ All workflows utilize [Lithops](https://lithops.cloud) to easily deploy and run 
 
 # Benchmarks
 
+For the geospatial benchmarks you first need to follow this [instructions](https://github.com/cloudbutton/geospatial-usecase/blob/main/INSTALL.md) to set up the environment.
+
 ## 1. [Lithops Compute and Storage Benchmarks](https://github.com/lithops-cloud/applications/tree/master/benchmarks)
 
 This is a benchmark to estimate the floating-point performance of the system for matrix multiplication operations using NumPy. It measures how many floating-point operations per second the system can perform for this specific operation.
@@ -55,3 +57,6 @@ In genomics, variant calling entails the alignment process, which is essentially
 ## 8. [Astronomica Interferometry](serverlessextract/)
 
 Processing radio interferometric data performing all the phases: rebinning, calibration and imaging using Lithops. 
+
+
+
