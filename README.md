@@ -12,11 +12,11 @@ This repository contains a summary of serverless benchmarks and pipelines design
 |     [*NDVI*](#4-ndvi-calculation)     |     Calculate NDVI from Object Storage images.     |   Sentinel2 satellite image from the [AWS Sentinel2 open data repository](https://registry.opendata.aws/sentinel-2/)      |          |
 |     [*Model creation from LiDAR pre-processing*](#5-model-creation-from-lidar-preprocessing)     |     Create terrain models using LiDAR partitioner.     |     [laz files](https://www.icgc.cat/es/Descargas/Elevaciones/Datos-lidar)     |     431 MB     |
 |     **Metabolomics**     |          |          |          |
-|     [*METASPACE*](#7-metaspace)     |      Run the METASPACE metabolite annotation pipeline on cloud resources.     |     Examples of datasets and databases in the link below     |          |
+|     [*METASPACE*](#6-metaspace)     |      Run the METASPACE metabolite annotation pipeline on cloud resources.     |     Examples of datasets and databases in the link below     |          |
 |      **Genomics**    |          |          |          |
-|      [*Variant Calling*](#8-variant-calling)    |    Alignment of sequencing reads, stored as FASTQ files, to a reference genome, stored as a FASTA file.      |  Trypanosome, Human, Bos Taurus (see links below)  |     703 MB, 14.184 GB, 17.263 GB     |
+|      [*Variant Calling*](#7-variant-calling)    |    Alignment of sequencing reads, stored as FASTQ files, to a reference genome, stored as a FASTA file.      |  Trypanosome, Human, Bos Taurus (see links below)  |     703 MB, 14.184 GB, 17.263 GB     |
 |     **Astronomics**     |          |          |          |
-|     [*Astronomica-interferometry*](#9-astronomica-interferometry)    |     Radio interferometric data processing.     |  [SB205.MS SB206.MS SB207.MS SB208.MS SB209.MS SB210.MS](https://share.obspm.fr/s/ezBfciEfmSs7Tqd?path=%2FDATA)        |  5.5 GB each sample    |
+|     [*Astronomica-interferometry*](#8-astronomica-interferometry)    |     Radio interferometric data processing.     |  [SB205.MS SB206.MS SB207.MS SB208.MS SB209.MS SB210.MS](https://share.obspm.fr/s/ezBfciEfmSs7Tqd?path=%2FDATA)        |  5.5 GB each sample    |
 
 
 In most cases there's a link to an external repository containing the code while others can be found here.
