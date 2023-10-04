@@ -15,8 +15,10 @@ To execute this notebook you need:
    ```
 2. Configure Lithops to use the built runtime (e.g. `model-calculation:1`). 
 
-3. Download the [LiDAR files](https://www.icgc.cat/es/Descargas/Elevaciones/Datos-lidar)  and upload them to an S3 bucket named *`cb-geospatial-wildfire`* .
+3. Create an S3 bucket named *`cb-geospatial-wildfire`*. 
 
-4. Follow the instructions in the notebook to execute the code.
+4. Download the [LiDAR files](https://www.icgc.cat/es/Descargas/Elevaciones/Datos-lidar)  and store them in a directory called *`input-las-tiles`* .
+
+5. Follow the instructions in the notebook to execute the code.
 
 **NOTE:**  you can change the names of the S3 bucket but then you have to change them in the notebook too.
