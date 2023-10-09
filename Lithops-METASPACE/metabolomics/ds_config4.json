@@ -1,0 +1,9 @@
+{
+  "name": "Mouse_brain",
+  "imzml_path": "cos://embl-datasets/huge2/ds.imzML",
+  "ibd_path": "cos://embl-datasets/huge2/ds.ibd",
+  "num_decoys": 20,
+  "polarity": "+",
+  "isocalc_sigma": 0.002476,
+  "metaspace_id": "2019-07-31_17h35m11s"
+}
