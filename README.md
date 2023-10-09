@@ -51,7 +51,7 @@ Use case of serverless image processing consuming data from Object Storage, NDVI
 ## 6. [Model creation](https://github.com/cloudbutton/geospatial-usecase/tree/main/calculate-models) from [LiDAR pre-processing](https://github.com/cloudbutton/geospatial-usecase/tree/main/lidar-partitioner)
 LIDAR is a novel tool to partition LiDAR files based on the denisty of points. The partitions are simmilar in size, which is convenient for serverless processing, as task granularity defines the execution time and cost. With this partitioned data we create several terrain models used in many geospatial workflows. We study the impact of load balancing by partitioning LiDAR data using the aforementioned density-based partitioner.
 
-## 7. [METASPACE](https://github.com/metaspace2020/Lithops-METASPACE)
+## 7. [METASPACE](Lithops-METASPACE/)
 
 Demonstrate using Lithops to run the METASPACE (Spatial metabolomics cloud platform that conducts molecular annotation of imaging mass spectrometry data) metabolite annotation pipeline on cloud resources.
 
