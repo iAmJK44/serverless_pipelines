@@ -44,7 +44,7 @@ This contains two applications in which Monte Carlo Methods is used to make comp
 
 Pre-processing of Sentinel2 images to enable serverless massive parallel processing with many workers consuming data from Object Storage using the Cloud-Optimized GeoTIFF format.
 
-## 5. [NDVI Calculation](https://github.com/cloudbutton/geospatial-usecase/tree/main/ndvi-diff)
+## 5. [NDVI Calculation](ndvi-diff/)
 
 Use case of serverless image processing consuming data from Object Storage, NDVI(Normalized Difference Vegetation Index) is calculated over many images to demonstrate high throughput and performance.
 
