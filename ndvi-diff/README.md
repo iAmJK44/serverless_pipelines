@@ -28,6 +28,6 @@ To execute this notebook you need:
     
 4. Follow the instructions in the notebook to execute the code using the cloudbutton-geospatial kernel.
 
-5. In order to make sure to process some images you can use the default configuration with the default dates, 15 value for cloud cover and the california coordinates named `'cali_coord'`.
+5. In order to make sure to process some images you can use the default configuration with the default dates, 15 as value for cloud cover and the california coordinates named `'cali_coord'`.
 
 **Note:** you can modify the runtime name but then you will need to edit it in the corresponding cells too.
