@@ -1,8 +1,0 @@
-{
-  "name": "db_config1",
-  "databases": [
-    "metabolomics/db/mol_db1.csv"
-  ],
-  "adducts": ["", "+H", "+Na", "+K"],
-  "modifiers": [""]
-}
