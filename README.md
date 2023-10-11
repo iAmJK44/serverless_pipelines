@@ -19,9 +19,9 @@ This repository contains a summary of serverless benchmarks and pipelines design
 |     **Astronomics**     |          |          |          |
 |     [*Astronomica-interferometry*](#9-astronomica-interferometry)    |     Radio interferometric data processing.     |  [SB205.MS SB206.MS SB207.MS SB208.MS SB209.MS SB210.MS](https://share.obspm.fr/s/ezBfciEfmSs7Tqd?path=%2FDATA)        |  ms    |
 |      **Elastic Exploration**    |          |          |          |
-|     [*UTS*](#10-uts)    |     Radio interferometric data processing.     |         |  ms    |
-|     [*Mandelbrot with Mariani Silver*](#11-mandelbrot-with-mariani-silver)    |     Radio interferometric data processing.     |       |  ms    |
-|     [*Betweenness Centrality*](#12-betweenness-centrality)    |     Radio interferometric data processing.     |         |  ms    |
+|     [*UTS*](#10-uts)    |         |         |     |
+|     [*Mandelbrot with Mariani Silver*](#11-mandelbrot-with-mariani-silver)    |         |       |    |
+|     [*Betweenness Centrality*](#12-betweenness-centrality)    |          |         |    |
 
 
 In most cases there's a link to an external repository containing the code while others can be found here.
