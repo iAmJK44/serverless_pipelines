@@ -18,6 +18,10 @@ This repository contains a summary of serverless benchmarks and pipelines design
 |      [*Variant Calling*](#8-variant-calling)    |    Alignment of sequencing reads, stored as FASTQ files, to a reference genome, stored as a FASTA file.      |  Trypanosome [[Genome](https://tritrypdb.org/tritrypdb/app/downloads/Current_Release/TbruceiTREU927/fasta/data/), [SRR6052133](https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&acc=SRR6052133&display=download)], Human [[Genome](http://hgdownload.cse.ucsc.edu/goldenpath/hg19/bigZips/), [SRR15068323](https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&acc=SRR15068323&display=data-access) , [ERR9856489](https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&acc=ERR9856489&display=data-access)], Bos Taurus [[Genome](https://www.ensembl.org/Bos_taurus/Info/Index), [SRR934415](https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&acc=SRR934415&display=data-access)]  |     fast, fastq     |
 |     **Astronomics**     |          |          |          |
 |     [*Astronomica-interferometry*](#9-astronomica-interferometry)    |     Radio interferometric data processing.     |  [SB205.MS SB206.MS SB207.MS SB208.MS SB209.MS SB210.MS](https://share.obspm.fr/s/ezBfciEfmSs7Tqd?path=%2FDATA)        |  ms    |
+|      **Elastic Exploration**    |          |          |          |
+|     [*UTS*](#10-uts)    |     Radio interferometric data processing.     |         |  ms    |
+|     [*Mandelbrot with Mariani Silver*](#11-mandelbrot-with-mariani-silver)    |     Radio interferometric data processing.     |       |  ms    |
+|     [*Betweenness Centrality*](#12-betweenness-centrality)    |     Radio interferometric data processing.     |         |  ms    |
 
 
 In most cases there's a link to an external repository containing the code while others can be found here.
@@ -55,6 +59,8 @@ LIDAR is a novel tool to partition LiDAR files based on the denisty of points. T
 
 Demonstrate using Lithops to run the METASPACE (Spatial metabolomics cloud platform that conducts molecular annotation of imaging mass spectrometry data) metabolite annotation pipeline on cloud resources.
 
+More information about this pipeline can be found on this [IBM Blog post](https://www.ibm.com/blog/decoding-dark-molecular-matter-in-spatial-metabolomics-with-ibm-cloud-functions/)
+
 ## 8. [Variant Calling](https://github.com/CLOUDLAB-URV/serverless-genomics/tree/main)
 
 In genomics, variant calling entails the alignment process, which is essentially a search for string similarities. This process aligns sequencing reads, typically stored as FASTQ files, with a reference genome, which is stored as a FASTA file. The reference genome and reads are split into smaller chunks for alignment.
@@ -63,5 +69,15 @@ In genomics, variant calling entails the alignment process, which is essentially
 
 Processing radio interferometric data performing all the phases: rebinning, calibration and imaging using Lithops. 
 
+## 10. [UTS](https://github.com/gfinol/elastic-exploration)
 
+Exploiting Inherent Elasticity of Serverless in Algorithms with Unbalanced and Irregular Workloads
+
+## 11. [Mandelbrot with Mariani Silver*](https://github.com/gfinol/elastic-exploration)
+
+Exploiting Inherent Elasticity of Serverless in Algorithms with Unbalanced and Irregular Workloads
+
+## 12. [Betweenness Centrality](https://github.com/gfinol/elastic-exploration)
+
+Exploiting Inherent Elasticity of Serverless in Algorithms with Unbalanced and Irregular Workloads
 

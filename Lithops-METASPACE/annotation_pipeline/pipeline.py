@@ -41,8 +41,8 @@ class Pipeline:
 
         lithops_bucket = self.config['lithops']['storage_bucket']
         self.ds_bucket = self.config.get('storage', {}).get('ds_bucket', lithops_bucket)
-        lithops_backend = self.config['lithops']['backend']
-        lithops_runtime = self.config['aws_lambda']['runtime']
+        lithops_mode = self.config['lithops']['mode']
+        lithops_runtime = self.config[lithops_mode]['runtime']
         
         self.lithops_executor = lithops.FunctionExecutor(config=self.config, runtime_memory=2048, runtime=lithops_runtime)
         if self.hybrid_impl:

@@ -29,10 +29,9 @@ This configuration is currently only supported with IBM Cloud and on-premise VMs
 
 ## 1. Installation
 
-Clone and install this repository with the following commands:
+Install the required dependencies with the following commands:
     
 ```
-git clone https://github.com/metaspace2020/Lithops-METASPACE.git
 cd Lithops-METASPACE
 pip install -e .
 ```
