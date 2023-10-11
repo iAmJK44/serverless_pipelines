@@ -13,7 +13,7 @@ This repository contains a summary of serverless benchmarks and pipelines design
 |     [*NDVI*](#5-ndvi-calculation)     |     Calculate NDVI from Object Storage images.     |   Sentinel2 satellite image from the [AWS Sentinel2 open data repository](https://registry.opendata.aws/sentinel-2/)      |        Cloud-Optimized GeoTIFF (COG)  |
 |     [*Model creation from LiDAR pre-processing*](#6-model-creation-from-lidar-pre-processing)     |     Create terrain models using LiDAR partitioner.     |     [laz files](https://www.icgc.cat/es/Descargas/Elevaciones/Datos-lidar)     |     laz     |
 |     **Metabolomics**     |          |          |          |
-|     [*METASPACE*](#7-metaspace)     |      Run the METASPACE metabolite annotation pipeline on cloud resources.     |     [Examples of datasets and databases](https://github.com/metaspace2020/Lithops-METASPACE#example-datasets)     |     imzML     |
+|     [*METASPACE metabolite annotation*](#7-metaspace-metabolite-annotation-pipeline)     |      Run the METASPACE metabolite annotation pipeline on cloud resources.     |     [Examples of datasets and databases](https://github.com/metaspace2020/Lithops-METASPACE#example-datasets)     |     imzML     |
 |      **Genomics**    |          |          |          |
 |      [*Variant Calling*](#8-variant-calling)    |    Alignment of sequencing reads, stored as FASTQ files, to a reference genome, stored as a FASTA file.      |  Trypanosome [[Genome](https://tritrypdb.org/tritrypdb/app/downloads/Current_Release/TbruceiTREU927/fasta/data/), [SRR6052133](https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&acc=SRR6052133&display=download)], Human [[Genome](http://hgdownload.cse.ucsc.edu/goldenpath/hg19/bigZips/), [SRR15068323](https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&acc=SRR15068323&display=data-access) , [ERR9856489](https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&acc=ERR9856489&display=data-access)], Bos Taurus [[Genome](https://www.ensembl.org/Bos_taurus/Info/Index), [SRR934415](https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&acc=SRR934415&display=data-access)]  |     fast, fastq     |
 |     **Astronomics**     |          |          |          |
@@ -51,7 +51,7 @@ Use case of serverless image processing consuming data from Object Storage, NDVI
 ## 6. [Model creation](https://github.com/cloudbutton/geospatial-usecase/tree/main/calculate-models) from [LiDAR pre-processing](https://github.com/cloudbutton/geospatial-usecase/tree/main/lidar-partitioner)
 LIDAR is a novel tool to partition LiDAR files based on the denisty of points. The partitions are simmilar in size, which is convenient for serverless processing, as task granularity defines the execution time and cost. With this partitioned data we create several terrain models used in many geospatial workflows. We study the impact of load balancing by partitioning LiDAR data using the aforementioned density-based partitioner.
 
-## 7. [METASPACE](Lithops-METASPACE/)
+## 7. [METASPACE metabolite annotation pipeline](Lithops-METASPACE/)
 
 Demonstrate using Lithops to run the METASPACE (Spatial metabolomics cloud platform that conducts molecular annotation of imaging mass spectrometry data) metabolite annotation pipeline on cloud resources.
 

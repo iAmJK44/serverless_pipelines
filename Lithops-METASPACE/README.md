@@ -23,6 +23,7 @@ This configuration is currently only supported with IBM Cloud and on-premise VMs
 ## Prerequisites:
 
 * Python 3.8.5
+* Lithops 3.0.0
 * An account with a [supported cloud provider](https://github.com/lithops-cloud/lithops#move-to-the-cloud) (if running on a cloud platform) 
 * Jupyter Notebook or Jupyter Lab (if running the benchmark notebooks)
 
@@ -59,11 +60,10 @@ compute backend and a storage backend. Additionally, set the following values in
 ```yaml
 lithops:
   mode: "serverless"
-  include_modules: ["annotation_pipeline"]
   data_limit: false
   
 serverless:
-  runtime: "metaspace2020/annotation-pipeline-runtime:1.0.0-ibmcf-python38"
+  runtime: "metaspace-aws:01"
 ```
 
 #### Hybrid mode
