@@ -1,0 +1,9 @@
+{
+  "name": "CT26_xenograft",
+  "imzml_path": "cos://embl-datasets/huge/ds.imzML",
+  "ibd_path": "cos://embl-datasets/huge/ds.ibd",
+  "num_decoys": 20,
+  "polarity": "+",
+  "isocalc_sigma": 0.001238,
+  "metaspace_id": "2016-09-21_16h06m49s"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "db_config7",
+  "databases": [
+    "metabolomics/db/mol_db1.csv",
+    "metabolomics/db/mol_db2.csv",
+    "metabolomics/db/mol_db3.csv",
+    "metabolomics/db/mol_db4.csv",
+    "metabolomics/db/mol_db7.csv",
+    "metabolomics/db/mol_db8.csv",
+    "metabolomics/db/mol_db9.csv",
+    "metabolomics/db/mol_db10.csv",
+    "metabolomics/db/mol_db11.csv",
+    "metabolomics/db/mol_db12.csv"
+  ],
+  "adducts": ["", "+H", "+Na", "+K"],
+  "modifiers": [
+    "", "-H2O", "-CO2", "-NH3",
+    "+CH3CN", "+CH3OH", "-CH4", "-HF", "-HCCH", "-HCN", "-H2CCH2", "-C2H6", "-NO", "-CH3OH", "-H2S",
+    "-CH2CO", "-CH3CHCH2", "-C2H5OH", "-NO2", "-SO", "-C4H8", "-C4H10", "-CH3COOH", "-HBr", "-HI"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "db_config5",
+  "databases": [
+    "metabolomics/db/mol_db1.csv",
+    "metabolomics/db/mol_db2.csv",
+    "metabolomics/db/mol_db3.csv",
+    "metabolomics/db/mol_db4.csv",
+    "metabolomics/db/mol_db7.csv",
+    "metabolomics/db/mol_db8.csv",
+    "metabolomics/db/mol_db9.csv",
+    "metabolomics/db/mol_db10.csv",
+    "metabolomics/db/mol_db11.csv",
+    "metabolomics/db/mol_db12.csv"
+  ],
+  "adducts": ["", "+H", "+Na", "+K"],
+  "modifiers": [""]
+}
