@@ -19,14 +19,14 @@ This repository contains a summary of serverless benchmarks and pipelines design
 |     **Astronomics**     |          |          |          |
 |     [*Astronomica-interferometry*](#9-astronomica-interferometry)    |     Radio interferometric data processing.     |  [SB205.MS SB206.MS SB207.MS SB208.MS SB209.MS SB210.MS](https://share.obspm.fr/s/ezBfciEfmSs7Tqd?path=%2FDATA)        |  ms    |
 |      **Elastic Exploration**    |          |          |          |
-|     [*UTS*](#10-uts)    |         |         |     |
-|     [*Mandelbrot with Mariani Silver*](#11-mandelbrot-with-mariani-silver)    |         |       |    |
-|     [*Betweenness Centrality*](#12-betweenness-centrality)    |          |         |    |
+|     [*UTS*](#10-uts)    |    The Unbalanced Tree Search (UTS) benchmark.     |         |     |
+|     [*Mandelbrot with Mariani Silver*](#11-mandelbrot-with-mariani-silver)    |  Render the Mandelbrot set using  Marian-Silver algorithm.    |       |    |
+|     [*Betweenness Centrality*](#12-betweenness-centrality)    |    Compute the Between Centrality (BC) algorithm.      |         |    |
 
 
 In most cases there's a link to an external repository containing the code while others can be found here.
 
-All workflows utilize [Lithops](https://lithops.cloud) to easily deploy and run code on any major Cloud serverless platform.
+All workflows except the ones in **Elastic Exploration** utilize **[Lithops](https://lithops.cloud)** to easily deploy and run code on any major Cloud serverless platform.
 
 # Benchmarks
 
@@ -71,13 +71,15 @@ Processing radio interferometric data performing all the phases: rebinning, cali
 
 ## 10. [UTS](https://github.com/gfinol/elastic-exploration)
 
-Exploiting Inherent Elasticity of Serverless in Algorithms with Unbalanced and Irregular Workloads
+The implementation of UTS presented here is the first that tackles an elastic resource provisioning.
 
 ## 11. [Mandelbrot with Mariani Silver*](https://github.com/gfinol/elastic-exploration)
 
-Exploiting Inherent Elasticity of Serverless in Algorithms with Unbalanced and Irregular Workloads
+Render the Mandelbrot set using the Marian-Silver algorithm as optimization technique. This algorithm relies on the fact that the Mandelbrot250
+set is connected: there is a path between any two points belonging to the set
 
 ## 12. [Betweenness Centrality](https://github.com/gfinol/elastic-exploration)
 
-Exploiting Inherent Elasticity of Serverless in Algorithms with Unbalanced and Irregular Workloads
+ Computing the Between Centrality (BC) algorithm. The implementation follows the Brandes’ algorithm described in the benchmark, augmenting Dijkstra’s single-
+source shortest paths (SSSP) algorithm for unweighted graphs.
 
