@@ -23,7 +23,7 @@ This configuration is currently only supported with IBM Cloud and on-premise VMs
 ## Prerequisites:
 
 * Python 3.8.5
-* Lithops 3.0.0
+* Lithops 3.0.1
 * An account with a [supported cloud provider](https://github.com/lithops-cloud/lithops#move-to-the-cloud) (if running on a cloud platform) 
 * Jupyter Notebook or Jupyter Lab (if running the benchmark notebooks)
 
