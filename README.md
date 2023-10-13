@@ -73,7 +73,7 @@ Processing radio interferometric data performing all the phases: rebinning, cali
 
 The implementation of UTS presented here is the first that tackles an elastic resource provisioning.
 
-## 11. [Mandelbrot with Mariani Silver*](https://github.com/gfinol/elastic-exploration)
+## 11. [Mandelbrot with Mariani Silver](https://github.com/gfinol/elastic-exploration)
 
 Render the Mandelbrot set using the Marian-Silver algorithm as optimization technique. This algorithm relies on the fact that the Mandelbrot250
 set is connected: there is a path between any two points belonging to the set
