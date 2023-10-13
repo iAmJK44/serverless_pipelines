@@ -57,7 +57,9 @@ LIDAR is a novel tool to partition LiDAR files based on the denisty of points. T
 
 ## 7. [METASPACE metabolite annotation pipeline](Lithops-METASPACE/)
 
-Demonstrate using Lithops to run the METASPACE (Spatial metabolomics cloud platform that conducts molecular annotation of imaging mass spectrometry data) metabolite annotation pipeline on cloud resources.
+Demonstrate using Lithops to run the METASPACE (Spatial metabolomics cloud platform that conducts molecular annotation of imaging mass spectrometry data) metabolite annotation pipeline on cloud resources. 
+
+The original implementation of this pipeline can be found on [Metasapce repository](https://github.com/metaspace2020/Lithops-METASPACE). We have addapted this implementation to work with Lithops 3.0.1 and with more recent package versions.
 
 More information about this pipeline can be found on this [IBM Blog post](https://www.ibm.com/blog/decoding-dark-molecular-matter-in-spatial-metabolomics-with-ibm-cloud-functions/)
 
