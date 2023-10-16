@@ -30,7 +30,7 @@ All workflows except the ones in **Elastic Exploration** utilize **[Lithops](htt
 
 # Benchmarks
 
-For the geospatial benchmarks you first need to follow this [instructions](https://github.com/cloudbutton/geospatial-usecase/blob/main/INSTALL.md) to set up the environment and you can find more information about them [here](https://cloudbutton.eu/docs/deliverables/CloudButton_D2.5.pdf).
+For the geospatial benchmarks you first need to follow this [instructions](https://github.com/cloudbutton/geospatial-usecase/blob/main/INSTALL.md) to set up the environment. Find more information about Geospatial, Genomics and Metabolomics benchmarks [here](https://cloudbutton.eu/docs/deliverables/CloudButton_D2.5.pdf).
 
 ## 1. [FLOPS Computation Test](https://github.com/lithops-cloud/applications/tree/master/benchmarks/flops)
 
