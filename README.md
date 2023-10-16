@@ -46,7 +46,7 @@ This contains two applications in which Monte Carlo Methods is used to make comp
 
 ## 4. [Hyperparameter Tunning with Grid Search](https://github.com/lithops-cloud/applications/tree/master/sklearn)
 
-Pre-processing of Sentinel2 images to enable serverless massive parallel processing with many workers consuming data from Object Storage using the Cloud-Optimized GeoTIFF format.
+Perform hyperparameter tuning using grid search algorithm. We have a dataset consisting of amazon product reviews and a sklearn classifier to classiy these reviews. We take advantage of cloud functions to tune this classifier's hyperparameters and show how Lithops can be used for this kind of computations.
 
 ## 5. [NDVI Calculation](https://github.com/cloudbutton/geospatial-usecase/tree/main/ndvi-diff)
 
