@@ -1,4 +1,4 @@
-# Lithops Serverless Benchmarks
+# Extreme Data Serverless Benchmarks
 
 This repository contains a summary of serverless benchmarks and pipelines designed to measure the performance of serverless architectures like Lithops.
 
