@@ -44,7 +44,7 @@ This benchmark measures the bandwidth using data transfer in Object Storage with
 
 ## 3. [Montecarlo Simulations](https://github.com/lithops-cloud/applications/tree/master/montecarlo)
 
-This contains two applications in which Monte Carlo Methods is used to make computations with big amount of random data using Cloud Functions with Lithops. 
+This contains two applications in which Monte Carlo Methods is used to make computations with big amount of random data using Cloud Functions with Lithops. In order to perform these simulations with AWS you need to configure your Lithops config file to use AWS and put it in the directory of execution. Then you just edit the code to not use the configuration of IBM implemented there.
 
 ## 4. [Hyperparameter Tunning with Grid Search](https://github.com/lithops-cloud/applications/tree/master/sklearn)
 
