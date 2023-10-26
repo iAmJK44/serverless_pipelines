@@ -10,7 +10,12 @@ To execute this notebook you need:
 
 ## Setup
 
-1. Download the [data](https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&acc=SRR934415&display=data-access)  and extract it in a directory similar to *`/home/user/Downloads/entire_ms/SB205.MS/`* .
+1. Download the [data](https://share.obspm.fr/s/ezBfciEfmSs7Tqd?path=%2FDATA)  and extract it in a directory similar to *`/home/user/Downloads/entire_ms/SB205.MS/`* . Change the user name in the path of this line of the main of [partition.py](partition/partition.py) file:
+
+   ```bash
+   $ p = Partitioner("/home/ayman/Downloads/entire_ms/SB205.MS/")
+   ```
+   In case you downloaded another set of data instead of SB205.MS, change the name too.
 
 2. Setup Lithops for AWS backend.
 
