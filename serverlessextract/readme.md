@@ -7,6 +7,7 @@ In this pipeline we perform radio interferomic data processing carrying out all 
 To execute this notebook you need:
    - An AWS Account.
    - Setup Lithops to work with AWS Lambda.
+   - Lithops version: 2.9.0
 
 ## Setup
 
