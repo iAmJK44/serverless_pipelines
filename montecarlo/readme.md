@@ -15,5 +15,6 @@ You can access Pi Estimation application and Stock Prediction application:
 ---
 ### References
 - [Monte Carlo Method](https://en.wikipedia.org/wiki/Monte_Carlo_method)
+- [Original Repository](https://github.com/lithops-cloud/applications/tree/master/montecarlo)
 -----
 
