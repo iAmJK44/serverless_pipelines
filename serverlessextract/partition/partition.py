@@ -81,13 +81,13 @@ class Partitioner:
 
 if __name__ == "__main__":
     partitions = 70
-    p = Partitioner("/home/ayman/Downloads/entire_ms/SB205.MS/")
+    p = Partitioner("/home/user/Downloads/entire_ms/SB205.MS/")
     total_partitions = p.partition_chunks(partitions)
     print(f"Total partitions created: {total_partitions}")
 
     upload_directory_to_s3(
         "partitions",
-        "aymanb-serverless-genomics",
+        "serverless-genomics",
         f"extract-data/partitions_{partitions}",
     )
 
