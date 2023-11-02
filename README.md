@@ -42,7 +42,7 @@ This is a benchmark to estimate the floating-point performance of the system for
 
 This benchmark measures the bandwidth using data transfer in Object Storage with a FaaS Service.
 
-## 3. [Montecarlo Simulations](https://github.com/lithops-cloud/applications/tree/master/montecarlo)
+## 3. [Montecarlo Simulations](montecarlo/)
 
 This contains two applications in which Monte Carlo Methods is used to make computations with big amount of random data using Cloud Functions with Lithops. In order to perform these simulations with AWS you need to configure your Lithops config file to use AWS and put it in the directory of execution. Then you just edit the code to not use the configuration of IBM implemented there.
 
