@@ -8,8 +8,8 @@ Monte Carlo methods, or Monte Carlo experiments, are a broad class of computatio
 
 You can access Pi Estimation application and Stock Prediction application:
 
-- [Pi Estimation](https://github.com/lithops-cloud/applications/tree/master/montecarlo/pi_estimation)
-- [Stock Prediction](https://github.com/lithops-cloud/applications/tree/master/montecarlo/stock_prediction)
+- [Pi Estimation](pi_estimation/)
+- [Stock Prediction](stock_prediction/)
 
 
 ---
