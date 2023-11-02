@@ -52,8 +52,6 @@ summarize results of all process_forecasts executions (aka "reduce" in map-reduc
 
 ### Lithops Configuration
 
-### Lithops Configuration
-
 Configure access details to your AWS or GCP Storage and Cloud Functions. 'storage_bucket' should point to some pre-existing bucket. This bucket will be used by Lithops to store intermediate results. All results will be stored in the folder lithops.jobs. For additional configuration parameters see configuration section [here](https://github.com/lithops-cloud/lithops/tree/master/config/).
 ```               
 ### Input data on the past stock prices
