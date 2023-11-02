@@ -100,7 +100,7 @@ def generate_plots(data_df, metric, statistic):
 if "__main__" == __name__:
     # Pipeline parameters
     executor = LithopsExecutor()
-    bucket_name = "aymanb-serverless-genomics"
+    bucket_name = "serverless-genomics"
     prefix = "extract-data/partitions_60/"
     output_dir = "/tmp/"
     extra_env = {"HOME": "/tmp"}
