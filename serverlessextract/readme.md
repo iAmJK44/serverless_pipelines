@@ -14,7 +14,7 @@ To execute this notebook you need:
 1. Download the [data](https://share.obspm.fr/s/ezBfciEfmSs7Tqd?path=%2FDATA)  and extract it in a directory similar to *`/home/user/Downloads/entire_ms/SB205.MS/`* . Change the user name in the path of this line of the main of [partition.py](partition/partition.py) file:
 
    ```bash
-   $ p = Partitioner("/home/ayman/Downloads/entire_ms/SB205.MS/")
+   $ p = Partitioner("/home/user/Downloads/entire_ms/SB205.MS/")
    ```
    In case you downloaded another set of data instead of SB205.MS, change the name too.
 
@@ -27,7 +27,7 @@ To execute this notebook you need:
    ```
 4. Configure Lithops to use the built runtime (e.g. `serverless-extract:1`). 
 
-5. Create an S3 bucket named *`aymanb-serverless-genomics`* to upload the data.
+5. Create an S3 bucket named *`serverless-genomics`* to upload the data.
 
 6. Run `partition.py` located in [partition](partition/) directory. This will create and upload the .ms files to the S3 bucket divided in 70 partition by default.
 
