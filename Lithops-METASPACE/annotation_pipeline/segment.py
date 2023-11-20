@@ -15,6 +15,26 @@ from concurrent.futures import ThreadPoolExecutor
 MAX_MZ_VALUE = 10 ** 5
 
 
+def read_chunk(chunk_sp_inds, storage, ibd_cobject, imzml_reader):
+    sp_id_to_idx = get_pixel_indices(imzml_reader.coordinates)
+    n_spectra = sum(imzml_reader.mzLengths[sp_i] for sp_i in chunk_sp_inds)
+    sp_mz_int_buf = np.zeros((n_spectra, 3), dtype=imzml_reader.mzPrecision)
+
+    chunk_start = 0
+    for sp_i, mzs, ints in get_spectra(storage, ibd_cobject, imzml_reader, chunk_sp_inds):
+        chunk_end = chunk_start + len(mzs)
+        sp_mz_int_buf[chunk_start:chunk_end, 0] = sp_id_to_idx[sp_i]
+        sp_mz_int_buf[chunk_start:chunk_end, 1] = mzs
+        sp_mz_int_buf[chunk_start:chunk_end, 2] = ints
+        chunk_start = chunk_end
+
+    by_mz = np.argsort(sp_mz_int_buf[:, 1])
+    sp_mz_int_buf = sp_mz_int_buf[by_mz]
+    del by_mz
+
+    return sp_mz_int_buf
+
+
 def get_imzml_reader(pw, imzml_cobject):
     def get_portable_imzml_reader(storage, foo):
         imzml_stream = storage.get_cloudobject(imzml_cobject, stream=True)
@@ -51,10 +71,11 @@ def get_spectra(storage, ibd_cobject, imzml_reader, sp_inds):
         yield sp_idx, mzs, ints
 
 
-def chunk_spectra(pw, ibd_cobject, imzml_reader_cobject, imzml_reader):
+def chunk_spectra(pw, ibd_cobject, imzml_reader_cobject, imzml_reader, on_the_fly):
     MAX_CHUNK_SIZE = 512 * 1024 ** 2  # 512MB
 
-    sp_id_to_idx = get_pixel_indices(imzml_reader.coordinates)
+    if not on_the_fly:
+        sp_id_to_idx = get_pixel_indices(imzml_reader.coordinates)
     row_size = 3 * max(4,
                        np.dtype(imzml_reader.mzPrecision).itemsize,
                        np.dtype(imzml_reader.intensityPrecision).itemsize)
@@ -105,12 +126,15 @@ def chunk_spectra(pw, ibd_cobject, imzml_reader_cobject, imzml_reader):
         return chunk_cobject
 
     chunks = list(plan_chunks())
-    memory_capacity_mb = 3072
-    futures = pw.map(upload_chunk, [(i,) for i in range(len(chunks))], runtime_memory=memory_capacity_mb)
-    ds_chunks_cobjects = pw.get_result(futures)
-    PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(chunks))
+    if on_the_fly:
+        return chunks
+    else:
+        memory_capacity_mb = 3072
+        futures = pw.map(upload_chunk, [(i,) for i in range(len(chunks))], runtime_memory=memory_capacity_mb)
+        ds_chunks_cobjects = pw.get_result(futures)
+        PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(chunks))
 
-    return ds_chunks_cobjects
+        return ds_chunks_cobjects
 
 
 def define_ds_segments(pw, ibd_cobject, imzml_reader_cobject, ds_segm_size_mb, sample_n):
@@ -140,7 +164,7 @@ def define_ds_segments(pw, ibd_cobject, imzml_reader_cobject, ds_segm_size_mb, s
     return ds_segments
 
 
-def segment_spectra(pw, ds_chunks_cobjects, ds_segments_bounds, ds_segm_size_mb, ds_segm_dtype):
+def segment_spectra(pw, ds_chunks_cobjects, ds_segments_bounds, ds_segm_size_mb, ds_segm_dtype, ibd_cobject, imzml_reader_cobject, ds_chunks_are_cobjects):
     ds_segm_n = len(ds_segments_bounds)
 
     # extend boundaries of the first and last segments
@@ -157,7 +181,11 @@ def segment_spectra(pw, ds_chunks_cobjects, ds_segments_bounds, ds_segm_size_mb,
 
     def segment_spectra_chunk(chunk_cobject, id, storage):
         print(f'Segmenting spectra chunk {id}')
-        sp_mz_int_buf = read_cloud_object_with_retry(storage, chunk_cobject, deserialise)
+        if ds_chunks_are_cobjects:
+            sp_mz_int_buf = read_cloud_object_with_retry(storage, chunk_cobject, deserialise)
+        else:
+            imzml_reader = read_cloud_object_with_retry(storage, imzml_reader_cobject, deserialise)
+            sp_mz_int_buf = read_chunk(ds_chunks_cobjects[chunk_cobject], storage, ibd_cobject, imzml_reader)
 
         def _first_level_segment_upload(segm_i):
             l = ds_segments_bounds[segm_i][0, 0]
@@ -175,7 +203,7 @@ def segment_spectra(pw, ds_chunks_cobjects, ds_segments_bounds, ds_segm_size_mb,
     memory_capacity_mb = first_level_segm_size_mb * 2 + memory_safe_mb
     first_futures = pw.map(
         segment_spectra_chunk,
-        [(co,) for co in ds_chunks_cobjects],
+        [(co,) for co in ds_chunks_cobjects] if ds_chunks_are_cobjects else range(len(ds_chunks_cobjects)),
         runtime_memory=memory_capacity_mb,
     )
     first_level_segms_cobjects = pw.get_result(first_futures)
