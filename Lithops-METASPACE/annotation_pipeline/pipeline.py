@@ -183,20 +183,27 @@ class Pipeline:
                 logger.info(f'Parsed imzml: {len(self.imzml_reader.coordinates)} spectra found')
                 self.cacher.save((self.imzml_reader, self.imzml_reader_cobject), cache_key)
 
-    def split_ds(self, use_cache=True):
+    def split_ds(self, use_cache=True, on_the_fly=True):
         cache_key = ':ds/split_ds.cache'
 
         if self.hybrid_impl:
             pass  # all work is done in segment_ds
         else:
-            if use_cache and self.cacher.exists(cache_key):
+            if not on_the_fly and use_cache and self.cacher.exists(cache_key):
                 self.ds_chunks_cobjects = self.cacher.load(cache_key)
                 logger.info(f'Loaded {len(self.ds_chunks_cobjects)} dataset chunks from cache')
             else:
                 self.ds_chunks_cobjects = chunk_spectra(self.lithops_executor, self.ibd_cobject,
-                                                        self.imzml_reader_cobject, self.imzml_reader)
-                logger.info(f'Uploaded {len(self.ds_chunks_cobjects)} dataset chunks')
-                self.cacher.save(self.ds_chunks_cobjects, cache_key)
+                                                        self.imzml_reader_cobject, self.imzml_reader,
+                                                        on_the_fly)
+                if on_the_fly:
+                    self.ds_chunks_are_cobjects = False
+                    logger.info(f'Partitioned into {len(self.ds_chunks_cobjects)} dataset chunks')
+                else:
+                    self.ds_chunks_are_cobjects = True
+                    self.cacher.save(self.ds_chunks_cobjects, cache_key)
+                    logger.info(f'Uploaded {len(self.ds_chunks_cobjects)} dataset chunks')
+
 
     def segment_ds(self, use_cache=True, debug_validate=False):
         cache_key = ':ds/segment_ds.cache'
@@ -246,6 +253,9 @@ class Pipeline:
                     self.ds_segments_bounds,
                     self.ds_segm_size_mb,
                     self.imzml_reader.mzPrecision,
+                    self.ibd_cobject,
+                    self.imzml_reader_cobject,
+                    self.ds_chunks_are_cobjects,
                 )
                 logger.info(f'Segmented dataset chunks into {len(self.ds_segms_cobjects)} segments')
                 self.cacher.save((self.ds_segments_bounds, self.ds_segms_cobjects, self.ds_segms_len), cache_key)
