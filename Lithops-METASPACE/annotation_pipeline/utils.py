@@ -27,7 +27,7 @@ class PipelineStats:
     def init(cls):
         Path('logs').mkdir(exist_ok=True)
         cls.path = datetime.now().strftime("logs/%Y-%m-%d_%H:%M:%S.csv")
-        headers = ['Function', 'Actions', 'Memory', 'AvgRuntime', 'Cost', 'CloudObjects']
+        headers = ['Function', 'Actions', 'Memory', 'inputData (KB)', 'outputData (KB)','AvgRuntime', 'Cost', 'CloudObjects']
         pd.DataFrame([], columns=headers).to_csv(cls.path, index=False)
 
     @classmethod
@@ -40,20 +40,24 @@ class PipelineStats:
         #    futures = [futures]
 
         def calc_cost(runtimes, memory_gb):
-            cost_in_dollars_per_gb_sec = 0.000017
+            cost_in_dollars_per_gb_sec = 0.0000167
             return sum([cost_in_dollars_per_gb_sec * memory_gb * runtime for runtime in runtimes])
             
         if (type(futures) != list) and (type(futures) != FuturesList):
             actions_num = 1
             func_name = futures.function_name
             runtimes = [futures.stats['worker_exec_time']]
+            input_data = [futures.stats['func_data_size_bytes']]
+            output_data = [futures.stats['func_result_size']]
         else:
             actions_num = len(futures)
             func_name = futures[0].function_name
             runtimes = [future.stats['worker_exec_time'] for future in futures]
+            input_data = [future.stats['func_data_size_bytes'] for future in futures]
+            output_data = [future.stats['func_result_size'] for future in futures]
 
         cost = calc_cost(runtimes, memory_mb / 1024)
-        cls._append([[func_name, actions_num, memory_mb, np.average(runtimes), cost, cloud_objects_n]])
+        cls._append([[func_name, actions_num, memory_mb, round((np.sum(input_data)/1024), 3), round((np.sum(output_data)/1024), 3), np.average(runtimes), cost, cloud_objects_n]])
 
     @classmethod
     def append_vm(cls, func_name, exec_time, cloud_objects_n=0):
@@ -62,7 +66,7 @@ class PipelineStats:
     @classmethod
     def get(cls):
         stats = pd.read_csv(cls.path)
-        print('Total cost: {:.3f} $ (Using IBM Cloud pricing)'.format(stats['Cost'].sum()))
+        print('Total cost: {:.3f} $ (Using AWS pricing)'.format(stats['Cost'].sum()))
         return stats
 
 
