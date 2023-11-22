@@ -60,6 +60,7 @@ compute backend and a storage backend. Additionally, set the following values in
 lithops:
   mode: "serverless"
   data_limit: false
+  storage_bucket : <YOUR_BUCKET>
   
 serverless:
   runtime: "metaspace-aws:01"
