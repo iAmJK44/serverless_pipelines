@@ -113,6 +113,7 @@ for i, (formula_i, row) in enumerate(top_mols.head().iterrows()):
     plt.figure(i)
     plt.title(f'{row.mol}{row.modifier}{row.adduct} - MSM {row.msm:.3f} FDR {row.fdr*100:.0f}%')
     plt.imshow(formula_images[formula_i][0].toarray())
+    plt.show()
 
 #######################
 # 4. CLEANUP TMP DATA #
