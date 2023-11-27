@@ -92,7 +92,7 @@ total_exec_time = {'total_execution_time': exec_time}
 print(df)
 
 # The pickle contains 2 objects: the dataframe with all the data collected from the functions and another with the total execution time
-fname = "config3.pkl"
+fname = "config2.pkl"
 pickle.dump((df, total_exec_time), open(fname, "wb"))
 
 #########################
