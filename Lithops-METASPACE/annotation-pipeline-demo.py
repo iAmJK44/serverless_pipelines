@@ -46,7 +46,7 @@ pipeline = Pipeline(
     # Input dataset & metabolite database
     input_ds, input_db,
     # Whether to use the pipeline False to accelerate repeated runs with the same database or dataset
-    use_ds_cache=True, use_db_cache=True,
+    use_ds_cache=False, use_db_cache=False,
     # Set to 'auto' to used the hybrid Serverless+VM implementation when available,
     # True to force Hybrid mode, or False to force pure Serverless mode.
     hybrid_impl='auto'
