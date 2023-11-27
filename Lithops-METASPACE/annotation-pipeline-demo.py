@@ -83,7 +83,8 @@ time_end = time.time()
 # Display statistics file
 from annotation_pipeline.utils import PipelineStats
 import pickle
-print(f'Total execution time: {time_end-time_start} s')
+exec_time = time_end-time_start
+print(f'Total execution time: {exec_time} s')
 PipelineStats.get()
 
 df = PipelineStats.get()
