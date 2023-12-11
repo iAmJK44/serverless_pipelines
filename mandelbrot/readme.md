@@ -3,7 +3,7 @@
 In this notebook the Mandelbrot set calculated on a limited space several times using the Cloudbutton toolkit. A certain region of the linear space is treated as a matrix and divided into chunks in order to be able to  be distributed among many functions. For each step, the corresponding image generated from the matrix will be plotted. The matrix is sliced into many chunks (as many as concurrency) so that each function will treat one of these. Thus, function arguments will be the limits or boundaries of a chunk.
 
 ## How to Run
-You need an AWS account and AWS Lambda Functions with AWS S3. You need to create an Object Storage bucket to run this application. You have to be sure that lithops is installed and works fine and your lithops configuration is done right. You can check out [https://github.com/lithops-cloud/lithops/tree/master/config](https://github.com/lithops-cloud/lithops/tree/master/config) for more information about configuration. Also dependencies listed below need to be installed prior to execution:
+You need an AWS account and AWS Lambda Functions with AWS S3. You need to create an Object Storage bucket to run this application. You have to be sure that lithops is installed and works fine and your lithops configuration is done right. You can check out [https://github.com/lithops-cloud/lithops/tree/master/config](https://github.com/lithops-cloud/lithops/tree/master/config) for more information about configuration. It was tested using Lithops 3.1.0. Also dependencies listed below need to be installed prior to execution:
 ```python
 import numpy as np
 from math import sqrt
