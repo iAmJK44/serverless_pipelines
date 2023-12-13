@@ -42,8 +42,7 @@ All your files and folders are presented as a tree in the file explorer. You can
 
 Configure access details to your AWS or GCP Storage and Cloud Functions. 'storage_bucket' should point to some pre-existing bucket. This bucket will be used by Lithops to store intermediate results. All results will be stored in the folder lithops.jobs. For additional configuration parameters see configuration section [here](https://github.com/lithops-cloud/lithops/tree/master/config/).
 
-```               
 ### Execution of simulation and conclusion
 
 After getting the config and everything ready, a FunctionExecutor is created with the config provided in code. Here lithops' map_reduce function is called with *randomize_points* as map function and *process_in_circle_points* as the reduce function.
-Then 1,000,000,000 points are generated and calculated if it is in the circular area parallelly.  Here we took advantage of cloud functions with lithops to use outer sources for performing a vast amount of random computation and in a scenerio where we paid for the machine or sources, we would have been paying just for the time spent for computation itself. As it is shown below it is 211 seconds for 100 IBM Cloud Functions with 1,000,000,000 random generations and calculations.
+Then 1,000,000,000 points are generated and calculated if it is in the circular area parallelly.  Here we took advantage of cloud functions with lithops to use outer sources for performing a vast amount of random computation and in a scenerio where we paid for the machine or sources, we would have been paying just for the time spent for computation itself.
