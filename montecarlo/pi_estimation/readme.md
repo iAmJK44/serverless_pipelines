@@ -17,7 +17,7 @@ In this example, the alue of the number pi is being estimated using Monte Carlo 
 ## Running the code
 - AWS Cloud or GCP account. 
 - You will need to have at least one existing object storage bucket.
-- Lithops version used: Lithops 2.9.0 
+- Lithops version used: Lithops 2.9.0 and 3.1.0
 
 ### Implementation of Monte Carlo simulation
 
