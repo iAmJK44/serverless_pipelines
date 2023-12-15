@@ -14,10 +14,11 @@ In this example, the alue of the number pi is being estimated using Monte Carlo 
 - 4. Calculate the ratio of number of points inside the quadrant to total number of points.
 - 5. Multiply the ratio by 4 and this result is the estimation of pi.
 
-## Running the code
+## Requirements for running the code
 - AWS Cloud or GCP account. 
 - You will need to have at least one existing object storage bucket.
 - Lithops version used: Lithops 2.9.0 and 3.1.0
+- Python 3.9
 
 ### Implementation of Monte Carlo simulation
 
