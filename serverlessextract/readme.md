@@ -8,6 +8,7 @@ To execute this notebook you need:
    - An AWS Account.
    - Setup Lithops to work with AWS Lambda.
    - Lithops version: 2.9.0
+   - Python 3.10
 
 ## Setup
 
