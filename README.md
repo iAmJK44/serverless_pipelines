@@ -51,7 +51,7 @@ This contains two applications in which Monte Carlo Methods is used to make comp
 
 Mandelbrot set calculated on a limited space several times using the Cloudbutton toolkit. A certain region of the linear space is treated as a matrix and divided into chunks in order to be able to be distributed among many functions. 
 
-## 5. [Hyperparameter Tunning with Grid Search](https://github.com/lithops-cloud/applications/tree/master/sklearn)
+## 5. [Hyperparameter Tunning with Grid Search](sklearn/)
 
 Perform hyperparameter tuning using grid search algorithm. We have a dataset consisting of amazon product reviews and a sklearn classifier to classiy these reviews. We take advantage of cloud functions to tune this classifier's hyperparameters and show how Lithops can be used for this kind of computations.
 
