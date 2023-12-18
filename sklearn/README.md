@@ -29,7 +29,7 @@ import bz2
 ## Requirements
 - AWS account
 - Lithops >= 2.9.0
-- scikit-lern 1.0
+- scikit-learn 1.0
 
 ## Download dataset
 
@@ -37,6 +37,35 @@ Download the dataset from [here](https://www.kaggle.com/bittlingmayer/amazonrevi
 `load_data` function seperates the data as X and Y arrays to prepare them for classifier.
 
 ## Run
+
+Firt of all, you need to build the runtime from this Dockerfile using:
+
+   ```bash
+   $ lithops runtime build -f Dockerfile sklearn-aws:01
+   ```
+
+Your Lithops config file should look something similar to:
+```bash
+lithops:
+    storage: aws_s3
+    backend: aws_lambda
+    data_limit : 6
+
+aws:
+    access_key_id :  <YOUR_AWS_KEY_ID>
+    secret_access_key : <YOUR_AWS_ACCESS_KEY>
+    runtime : sklearn-aws:04
+    runtime_memory : 1024 
+
+aws_s3:
+    region_name : <AWS_REGION>
+    storage_bucket: <S3_BUCKET>
+
+aws_lambda:
+    execution_role: <YOUR_AWS_ROLE>
+    region_name: <AWS_REGION>
+
+```
 
 You can see options and run the code with the lines below. This application is not meant to be run on the noteebok. You may encounter problems if you try to run it on Jupyter Notebook.
 
