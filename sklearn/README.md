@@ -54,7 +54,7 @@ lithops:
 aws:
     access_key_id :  <YOUR_AWS_KEY_ID>
     secret_access_key : <YOUR_AWS_ACCESS_KEY>
-    runtime : sklearn-aws:04
+    runtime : sklearn-aws:01
     runtime_memory : 1024 
 
 aws_s3:
