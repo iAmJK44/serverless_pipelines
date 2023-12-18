@@ -38,7 +38,7 @@ Download the dataset from [here](https://www.kaggle.com/bittlingmayer/amazonrevi
 
 ## Run
 
-Firt of all, you need to build the runtime from this Dockerfile using:
+Firt of all, you need to build the runtime from this [Dockerfile](runtime/Dockerfile) using:
 
    ```bash
    $ lithops runtime build -f Dockerfile sklearn-aws:01
