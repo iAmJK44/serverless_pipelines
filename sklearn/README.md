@@ -26,6 +26,11 @@ import click
 import bz2
 ```
 
+## Requirements
+- AWS account
+- Lithops >= 2.9.0
+- scikit-lern 1.0
+
 ## Download dataset
 
 Download the dataset from [here](https://www.kaggle.com/bittlingmayer/amazonreviews) and extract the zip folder
