@@ -60,7 +60,7 @@ Perform hyperparameter tuning using grid search algorithm. We have a dataset con
 Use case of serverless image processing consuming data from Object Storage, NDVI(Normalized Difference Vegetation Index) is calculated over many images to demonstrate high throughput and performance.
 
 ## 7. [Model creation](https://github.com/cloudbutton/geospatial-usecase/tree/main/calculate-models) from [LiDAR pre-processing](https://github.com/cloudbutton/geospatial-usecase/tree/main/lidar-partitioner)
-LIDAR is a novel tool to partition LiDAR files based on the denisty of points. The partitions are simmilar in size, which is convenient for serverless processing, as task granularity defines the execution time and cost. With this partitioned data we create several terrain models used in many geospatial workflows. We study the impact of load balancing by partitioning LiDAR data using the aforementioned density-based partitioner.
+LIDAR is a novel tool to partition LiDAR files based on the denisty of points. With this partitioned data we create several terrain models used in many geospatial workflows. We study the impact of load balancing by partitioning LiDAR data using the aforementioned density-based partitioner.
 
 ## 8. [METASPACE metabolite annotation pipeline](Lithops-METASPACE/)
 
