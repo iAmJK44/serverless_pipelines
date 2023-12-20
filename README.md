@@ -68,7 +68,7 @@ Demonstrate using Lithops to run the METASPACE (Spatial metabolomics cloud platf
 
 The original implementation of this pipeline can be found on [Metaspace repository](https://github.com/metaspace2020/Lithops-METASPACE). We have addapted this implementation to work with Lithops 3.0.1 and with more recent package versions.
 
-More information about this pipeline can be found on this [IBM Blog post](https://www.ibm.com/blog/decoding-dark-molecular-matter-in-spatial-metabolomics-with-ibm-cloud-functions/)
+More information about this pipeline can be found on this [IBM Blog post](https://www.ibm.com/blog/decoding-dark-molecular-matter-in-spatial-metabolomics-with-ibm-cloud-functions/).
 
 ## 9. [Variant Calling](https://github.com/CLOUDLAB-URV/serverless-genomics/tree/main)
 
