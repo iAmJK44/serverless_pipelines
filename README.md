@@ -87,8 +87,7 @@ set is connected: there is a path between any two points belonging to the set
 
 ## 13. [Betweenness Centrality](https://github.com/gfinol/elastic-exploration)
 
-Computing the Between Centrality (BC) algorithm. The implementation follows the Brandes’ algorithm described in the benchmark, augmenting Dijkstra’s single-
-source shortest paths (SSSP) algorithm for unweighted graphs.
+Computing the Between Centrality (BC) algorithm. The implementation follows the Brandes’ algorithm described in the benchmark, augmenting Dijkstra’s single-source shortest paths (SSSP) algorithm for unweighted graphs.
 
 ## 14. [TeraSort](https://github.com/GEizaguirre/terasort-lithops)
 
