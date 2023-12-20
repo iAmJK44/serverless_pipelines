@@ -63,9 +63,7 @@ Use case of serverless image processing consuming data from Object Storage, NDVI
 LIDAR is a novel tool to partition LiDAR files based on the denisty of points. With this partitioned data we create several terrain models used in many geospatial workflows. We study the impact of load balancing by partitioning LiDAR data using the aforementioned density-based partitioner.
 
 ## 8. [METASPACE metabolite annotation pipeline](Lithops-METASPACE/)
-
-Demonstrate using Lithops to run the METASPACE (Spatial metabolomics cloud platform that conducts molecular annotation of imaging mass spectrometry data) metabolite annotation pipeline on cloud resources. 
-
+Run the METASPACE (Spatial metabolomics cloud platform that conducts molecular annotation of imaging mass spectrometry data) metabolite annotation pipeline on cloud resources using Lithops. 
 The original implementation of this pipeline can be found on [Metaspace repository](https://github.com/metaspace2020/Lithops-METASPACE). We have addapted this implementation to work with Lithops 3.0.1 and with more recent package versions.
 
 More information about this pipeline can be found on this [IBM Blog post](https://www.ibm.com/blog/decoding-dark-molecular-matter-in-spatial-metabolomics-with-ibm-cloud-functions/).
