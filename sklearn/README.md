@@ -79,7 +79,7 @@ You can see options and run the code with the lines below. This application is n
    ```
 ---
 
-In this block you can edit options and change default values for arguments taken.
+In this block you can edit options and change default values for arguments taken. To run it using Lithops you must use `--backend lithops` option.
 
 ```python
 @click.command()
