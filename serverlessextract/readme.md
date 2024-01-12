@@ -11,7 +11,7 @@ To execute this notebook you need:
    - Python 3.10
 
 ## Setup
-1. Clone this github and install the requirements in `requirements.txt`:
+1. Clone this github and install the requirements in [`requirements.txt`](requirements.txt):
 
    ```bash
    $ git clone https://github.com/iAmJK44/serverless_benchmarks.git
