@@ -14,8 +14,8 @@ To execute this notebook you need:
 1. Clone this github and install the requirements in `requirements.txt`:
 
    ```bash
-   $  git clone https://github.com/iAmJK44/serverless_benchmarks.git
-   $  pip install -r requirements.txt
+   $ git clone https://github.com/iAmJK44/serverless_benchmarks.git
+   $ pip install -r requirements.txt
    ```
 
 2. Download the [data](https://share.obspm.fr/s/ezBfciEfmSs7Tqd?path=%2FDATA)  and extract it in a directory similar to *`/home/user/Downloads/entire_ms/SB205.MS/`* . Change the user name in the path of this line of the main of [partition.py](partition/partition.py) file:
