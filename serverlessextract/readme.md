@@ -11,33 +11,39 @@ To execute this notebook you need:
    - Python 3.10
 
 ## Setup
+1. Clone this github and install the requirements in `requirements.txt`:
 
-1. Download the [data](https://share.obspm.fr/s/ezBfciEfmSs7Tqd?path=%2FDATA)  and extract it in a directory similar to *`/home/user/Downloads/entire_ms/SB205.MS/`* . Change the user name in the path of this line of the main of [partition.py](partition/partition.py) file:
+   ```bash
+   $  git clone https://github.com/iAmJK44/serverless_benchmarks
+   $  pip install -r requirements.txt
+   ```
+
+2. Download the [data](https://share.obspm.fr/s/ezBfciEfmSs7Tqd?path=%2FDATA)  and extract it in a directory similar to *`/home/user/Downloads/entire_ms/SB205.MS/`* . Change the user name in the path of this line of the main of [partition.py](partition/partition.py) file:
 
    ```bash
    $ p = Partitioner("/home/user/Downloads/entire_ms/SB205.MS/")
    ```
    In case you downloaded another set of data instead of SB205.MS, change the name too.
 
-2. Setup Lithops for AWS backend.
+3. Setup Lithops for AWS backend.
 
-3. Build the runtime in the [`docker`](docker/) directory :
+4. Build the runtime in the [`docker`](docker/) directory :
 
    ```bash
    $ lithops runtime build -f Dockerfile serverless-extract:1
    ```
-4. Configure Lithops to use the built runtime (e.g. `serverless-extract:1`). 
+5. Configure Lithops to use the built runtime (e.g. `serverless-extract:1`). 
 
-5. Create an S3 bucket named *`serverless-genomics`* to upload the data.
+6. Create an S3 bucket named *`serverless-genomics`* to upload the data.
 
-6. Run `partition.py` located in [partition](partition/) directory. This will create and upload the .ms files to the S3 bucket divided in 70 partition by default.
+7. Run `partition.py` located in [partition](partition/) directory. This will create and upload the .ms files to the S3 bucket divided in 70 partition by default.
 
    ```bash
    $ cd ./partition/
    $ python3 partition.py
    ```
 
-7. Run the `pipeline.py` file. This file performs all the phases of the pipeline [rebinning, calibration, imaging]:
+8. Run the `pipeline.py` file. This file performs all the phases of the pipeline [rebinning, calibration, imaging]:
    ```bash
    $ python3 pipeline.py
    ```
