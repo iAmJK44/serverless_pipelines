@@ -1,5 +1,5 @@
-# Python 3.9
-FROM python:3.9-slim-buster
+# Python 3.10
+FROM python:3.10-slim-buster
 
 RUN apt-get update \
     # Install aws-lambda-cpp build dependencies
@@ -34,7 +34,7 @@ RUN pip install --upgrade --ignore-installed pip wheel six setuptools \
         ps-mem \
         tblib 
 
-RUN pip install --upgrade scikit-learn==1.0
+RUN pip install --upgrade scikit-learn==1.3.0
 RUN pip install click 
 # Set working directory to function root directory
 WORKDIR ${FUNCTION_DIR}
