@@ -28,8 +28,8 @@ import bz2
 
 ## Requirements
 - AWS account
-- Lithops >= 2.9.0
-- scikit-learn 1.0
+- Lithops 3.1.0
+- scikit-learn 1.3.0
 
 ## Download dataset
 
