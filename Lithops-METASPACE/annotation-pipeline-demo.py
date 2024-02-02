@@ -30,7 +30,7 @@ lithops.__version__
 import json
 
 # Input dataset and database (increase/decrease config number to increase/decrease job size)
-input_ds = json.load(open('metabolomics/ds_config2.json'))
+input_ds = json.load(open('metabolomics/ds_config5.json'))
 input_db = json.load(open('metabolomics/db_config2.json'))
 
 print(input_ds)
@@ -49,7 +49,7 @@ pipeline = Pipeline(
     use_ds_cache=False, use_db_cache=False,
     # Set to 'auto' to used the hybrid Serverless+VM implementation when available,
     # True to force Hybrid mode, or False to force pure Serverless mode.
-    hybrid_impl='auto'
+    hybrid_impl='False'
 )
 
 ### DATABASE PREPROCESSING ###
@@ -79,6 +79,9 @@ pipeline.annotate()
 pipeline.run_fdr()
 time_end = time.time()
 
+# Download annotated molecules images
+formula_images = pipeline.get_images(as_png=False)
+
 ### LITHOPS SUMMARY ###
 # Display statistics file
 from annotation_pipeline.utils import PipelineStats
@@ -92,7 +95,7 @@ total_exec_time = {'total_execution_time': exec_time}
 print(df)
 
 # The pickle contains 2 objects: the dataframe with all the data collected from the functions and another with the total execution time
-fname = "config2.pkl"
+fname = "config3.pkl"
 pickle.dump((df, total_exec_time), open(fname, "wb"))
 
 #########################
@@ -105,8 +108,7 @@ top_mols = (results_df
                .drop('database_path', axis=1)
                .drop_duplicates(['mol','modifier','adduct']))
 print(top_mols.head())
-# Download annotated molecules images
-formula_images = pipeline.get_images(as_png=False)
+
 # Display most annotated molecules images
 import matplotlib.pyplot as plt
 for i, (formula_i, row) in enumerate(top_mols.head().iterrows()):

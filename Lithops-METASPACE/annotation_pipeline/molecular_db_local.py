@@ -15,7 +15,6 @@ FORMULA_TO_ID_CHUNK_MB = 512
 
 def build_database_local(storage, db_config, ds_config, mols_dbs_cobjects):
     t = time()
-
     logger.info('Generating formulas...')
     db_data_cobjects, formulas_df = get_formulas_df(storage, db_config, ds_config, mols_dbs_cobjects)
     num_formulas = len(formulas_df)

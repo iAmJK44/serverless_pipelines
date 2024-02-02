@@ -2,7 +2,7 @@ from itertools import product, repeat
 import os
 import numpy as np
 import pandas as pd
-from time import time
+import time as time
 from concurrent.futures.thread import ThreadPoolExecutor
 
 from annotation_pipeline.formula_parser import safe_generate_ion_formula
@@ -72,8 +72,12 @@ def build_fdr_rankings(pw, config_ds, config_db, mol_dbs_cobjects, formula_to_id
                              for ranking_i in range(n_decoy_rankings))
 
     memory_capacity_mb = 1536
+    st = time.time()
     futures = pw.map(build_ranking, ranking_jobs, runtime_memory=memory_capacity_mb)
     ranking_cobjects = [cobject for job_i, cobject in sorted(pw.get_result(futures))]
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
+
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(futures))
 
     rankings_df = pd.DataFrame(ranking_jobs, columns=['group_i', 'ranking_i', 'database_path', 'modifier', 'adduct'])
@@ -123,15 +127,19 @@ def calculate_fdrs(pw, rankings_df):
             ranking_jobs.append((target_row, decoy_rows.cobject.tolist()))
 
     memory_capacity_mb = 256
+    st = time.time()
     futures = pw.map(merge_rankings, ranking_jobs, runtime_memory=memory_capacity_mb)
     results = pw.get_result(futures)
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
+
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb)
 
     return pd.concat(results)
 
 
 def calculate_fdrs_vm(storage, formula_scores_df, db_data_cobjects):
-    t = time()
+    t = time.time()
 
     msms_df = formula_scores_df[['msm']]
 
@@ -154,6 +162,6 @@ def calculate_fdrs_vm(storage, formula_scores_df, db_data_cobjects):
     with ThreadPoolExecutor(os.cpu_count()) as pool:
         results_dfs = list(pool.map(run_fdr, db_data_cobjects))
 
-    exec_time = time() - t
+    exec_time = time.time() - t
     return pd.concat(results_dfs), exec_time
 

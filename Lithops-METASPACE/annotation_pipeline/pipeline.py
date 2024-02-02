@@ -1,6 +1,6 @@
 from itertools import chain
 from pathlib import Path
-
+import time as time
 import lithops
 import pandas as pd
 
@@ -41,15 +41,19 @@ class Pipeline:
 
         lithops_bucket = self.config['lithops']['storage_bucket']
         self.ds_bucket = self.config.get('storage', {}).get('ds_bucket', lithops_bucket)
-        lithops_mode = self.config['lithops']['mode']
-        lithops_runtime = self.config[lithops_mode]['runtime']
-        
-        self.lithops_executor = lithops.FunctionExecutor(config=self.config, runtime_memory=2048, runtime=lithops_runtime)
+        #lithops_mode = self.config['lithops']['mode']
+        serverless_backend = self.config['serverless']['backend']
+        serverless_runtime = self.config['serverless']['runtime']
+        print(serverless_runtime)
+        #standalone_runtime = self.config[standalone_backend]['runtime']
         if self.hybrid_impl:
+            self.lithops_executor = lithops.FunctionExecutor(backend=serverless_backend, execution_role='arn:aws:iam::776724236183:role/LithopsExecutionRole', region_name= 'us-east-1', runtime_memory=2048, runtime=serverless_runtime)
             if self.config['lithops']['mode'] == 'localhost':
                 self.lithops_vm_executor = self.lithops_executor
             else:
                 self.lithops_vm_executor = lithops.StandaloneExecutor(config=self.config)
+        else:
+            self.lithops_executor = lithops.FunctionExecutor(config=self.config, runtime_memory=2048, runtime=serverless_runtime)
 
         self.storage = Storage(config=self.config)
 
@@ -316,12 +320,17 @@ class Pipeline:
                                                            self.image_gen_config, memory_capacity_mb, self.ds_segm_size_mb,
                                                            self.hybrid_impl)
 
+            
+            st = time.time()
             futures = self.lithops_executor.map(
                 process_centr_segment,
                 [co for co in self.db_segms_cobjects],
                 runtime_memory=memory_capacity_mb,
             )
             formula_metrics_list, images_cloud_objs = zip(*self.lithops_executor.get_result(futures))
+            elapsed = time.time() - st
+            print(f'Time: {elapsed}')
+
             self.formula_metrics_df = pd.concat(formula_metrics_list)
             self.images_cloud_objs = list(chain(*images_cloud_objs))
             PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(self.images_cloud_objs))

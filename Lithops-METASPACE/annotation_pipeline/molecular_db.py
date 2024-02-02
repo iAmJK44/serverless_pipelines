@@ -3,7 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 import pandas as pd
 import hashlib
 import math
-
+import time as time
 from annotation_pipeline.formula_parser import safe_generate_ion_formula
 from annotation_pipeline.utils import logger, PipelineStats, serialise, deserialise, read_cloud_object_with_retry
 
@@ -57,8 +57,11 @@ def build_database(pw, db_config, mols_dbs_cobjects):
         return cobjects
 
     memory_capacity_mb = 512
+    st = time.time()
     futures = pw.map(generate_formulas, adduct_jobs, runtime_memory=memory_capacity_mb)
     results = pw.get_result(futures)
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
     chunk_cobjects = [[] for i in range(N_HASH_CHUNKS)]
     for cobjects_dict in results:
         for chunk_i, cobject in cobjects_dict.items():
@@ -80,9 +83,12 @@ def build_database(pw, db_config, mols_dbs_cobjects):
         return len(chunk)
 
     memory_capacity_mb = 512
+    st = time.time()
     futures = pw.map(get_formulas_number_per_chunk, list(enumerate(chunk_cobjects)),
                      runtime_memory=memory_capacity_mb)
     formulas_nums = pw.get_result(futures)
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb)
 
     def store_formulas_segments(chunk_i, chunk_cobjects, storage):
@@ -108,9 +114,13 @@ def build_database(pw, db_config, mols_dbs_cobjects):
         return segm_cobjects
 
     memory_capacity_mb = 512
+    st = time.time()
     futures = pw.map(store_formulas_segments, list(enumerate(chunk_cobjects)),
                      runtime_memory=memory_capacity_mb)
     results = pw.get_result(futures)
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
+
     formula_cobjects = [segm for segms in results for segm in segms]
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb,
                                 cloud_objects_n=len(formula_cobjects))
@@ -143,9 +153,13 @@ def build_database(pw, db_config, mols_dbs_cobjects):
 
     safe_mb = 512
     memory_capacity_mb = formula_to_id_chunk_mb * 2 + safe_mb
+    st = time.time()
     futures = pw.map(store_formula_to_id_chunk, list(enumerate(formula_to_id_inputs)),
                      runtime_memory=memory_capacity_mb)
     formula_to_id_cobjects = pw.get_result(futures)
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
+
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=n_formula_to_id)
     logger.info(f'Built {n_formula_to_id} formula_to_id dictionaries chunks')
 
@@ -188,9 +202,12 @@ def calculate_centroids(pw, formula_cobjects, ds_config):
     })
 
     memory_capacity_mb = 2048
+    st = time.time()
     futures = pw.map(calculate_peaks_chunk, list(enumerate(formula_cobjects)),
                      runtime_memory=memory_capacity_mb)
     results = pw.get_result(futures)
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(futures))
 
     num_centroids = sum(count for cobj, count in results)
@@ -207,7 +224,10 @@ def upload_mol_dbs_from_dir(storage, databases_paths):
         return storage.put_cloudobject(serialise(mol_sfs))
 
     with ThreadPoolExecutor() as pool:
+        st = time.time()
         mol_dbs_cobjects = list(pool.map(_upload, databases_paths))
+        elapsed = time.time() - st
+        print(f'Time: {elapsed}')
 
     return mol_dbs_cobjects
 

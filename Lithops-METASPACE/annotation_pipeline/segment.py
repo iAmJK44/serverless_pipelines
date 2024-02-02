@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import sys
 import math
-
+import time as time
 import requests
 from pyimzml.ImzMLParser import ImzMLParser
 
@@ -44,8 +44,12 @@ def get_imzml_reader(pw, imzml_cobject):
         return imzml_reader, imzml_reader_cobject
 
     memory_capacity_mb = 1024
+    st = time.time()
     future = pw.call_async(func=get_portable_imzml_reader, data=[])
     imzml_reader, imzml_reader_cobject = pw.get_result(future)
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
+
     PipelineStats.append_func(future, memory_mb=memory_capacity_mb, cloud_objects_n=1)
 
     return imzml_reader, imzml_reader_cobject
@@ -158,8 +162,12 @@ def define_ds_segments(pw, ibd_cobject, imzml_reader_cobject, ds_segm_size_mb, s
 
     logger.info('Defining dataset segments bounds')
     memory_capacity_mb = 1024
+    st = time.time()
     future = pw.call_async(get_segm_bounds, [], runtime_memory=memory_capacity_mb)
     ds_segments = pw.get_result(future)
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
+
     PipelineStats.append_func(future, memory_mb=memory_capacity_mb)
     return ds_segments
 
@@ -201,12 +209,16 @@ def segment_spectra(pw, ds_chunks_cobjects, ds_segments_bounds, ds_segm_size_mb,
 
     memory_safe_mb = 1536
     memory_capacity_mb = first_level_segm_size_mb * 2 + memory_safe_mb
+    st = time.time()
     first_futures = pw.map(
         segment_spectra_chunk,
         [(co,) for co in ds_chunks_cobjects] if ds_chunks_are_cobjects else range(len(ds_chunks_cobjects)),
         runtime_memory=memory_capacity_mb,
     )
     first_level_segms_cobjects = pw.get_result(first_futures)
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
+
     if not isinstance(first_futures, list): first_futures = [first_futures]
     PipelineStats.append_func(first_futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(first_futures) * len(ds_segments_bounds))
 
@@ -246,8 +258,12 @@ def segment_spectra(pw, ds_chunks_cobjects, ds_segments_bounds, ds_segm_size_mb,
     second_level_segms_cobjects = [(segm_cobjects,) for segm_cobjects in second_level_segms_cobjects]
 
     # same memory capacity
+    st = time.time()
     second_futures = pw.map(merge_spectra_chunk_segments, second_level_segms_cobjects, runtime_memory=memory_capacity_mb)
     ds_segms_len, ds_segms_cobjects = list(zip(*pw.get_result(second_futures)))
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
+
     ds_segms_len = list(np.concatenate(ds_segms_len))
     ds_segms_cobjects = list(np.concatenate(ds_segms_cobjects))
     PipelineStats.append_func(second_futures, memory_mb=memory_capacity_mb, cloud_objects_n=ds_segm_n)
@@ -272,9 +288,13 @@ def clip_centr_df(pw, peaks_cobjects, mz_min, mz_max):
         return clip_centr_chunk_cobject, centr_df_chunk.shape[0]
 
     memory_capacity_mb = 512
+    st = time.time()
     futures = pw.map(clip_centr_df_chunk, list(enumerate(peaks_cobjects)),
                      runtime_memory=memory_capacity_mb)
     clip_centr_chunks_cobjects, centr_n = list(zip(*pw.get_result(futures)))
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
+
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(futures))
 
     clip_centr_chunks_cobjects = list(clip_centr_chunks_cobjects)
@@ -293,8 +313,12 @@ def define_centr_segments(pw, clip_centr_chunks_cobjects, centr_n, ds_segm_n, ds
         return first_peak_df.mz.values
 
     memory_capacity_mb = 512
+    st = time.time()
     futures = pw.map(get_first_peak_mz, clip_centr_chunks_cobjects, runtime_memory=memory_capacity_mb)
     first_peak_df_mz = np.concatenate(pw.get_result(futures))
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
+
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb)
 
     ds_size_mb = ds_segm_n * ds_segm_size_mb
@@ -342,12 +366,16 @@ def segment_centroids(pw, clip_centr_chunks_cobjects, centr_segm_lower_bounds, d
         return dict(sub_segms_cobjects)
 
     memory_capacity_mb = 512
+    st = time.time()
     first_futures = pw.map(
         segment_centr_chunk,
         clip_centr_chunks_cobjects,
         runtime_memory=memory_capacity_mb,
     )
     first_level_segms_cobjects = pw.get_result(first_futures)
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
+
     PipelineStats.append_func(first_futures, memory_mb=memory_capacity_mb,
                                 cloud_objects_n=len(first_futures) * len(centr_segm_lower_bounds))
 
@@ -419,8 +447,12 @@ def segment_centroids(pw, clip_centr_chunks_cobjects, centr_segm_lower_bounds, d
     assert len(first_level_cobjs) == len(set(co.key for co in first_level_cobjs)), 'Duplicate CloudObject key in first_level_segms_cobjects'
 
     memory_capacity_mb = 2048
+    st = time.time()
     second_futures = pw.map(merge_centr_df_segments, second_level_segms_cobjects, runtime_memory=memory_capacity_mb)
     db_segms_cobjects = list(np.concatenate(pw.get_result(second_futures)))
+    elapsed = time.time() - st
+    print(f'Time: {elapsed}')
+
     PipelineStats.append_func(second_futures, memory_mb=memory_capacity_mb, cloud_objects_n=centr_segm_n)
 
     assert len(db_segms_cobjects) == len(set(co.key for co in db_segms_cobjects)), 'Duplicate CloudObject key in db_segms_cobjects'
