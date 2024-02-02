@@ -70,6 +70,25 @@ class PipelineStats:
         return stats
 
 
+def display_stats(futures):
+    stats = [f.stats for f in futures]
+
+    worker_func_cpu_usage = np.mean([stat['worker_func_cpu_usage'] for stat in stats])
+    worker_func_cpu_system_time = np.mean([stat['worker_func_cpu_system_time'] for stat in stats])
+    worker_func_cpu_user_time = np.mean([stat['worker_func_cpu_user_time'] for stat in stats])
+    worker_func_cpu_total_time = np.mean([stat['worker_func_cpu_total_time'] for stat in stats])
+
+    worker_func_sent_net_io = sum([stat['worker_func_sent_net_io'] for stat in stats])
+    worker_func_recv_net_io = sum([stat['worker_func_recv_net_io'] for stat in stats])
+
+    print(f'CPU avg usage: {worker_func_cpu_usage}')
+    print(f'CPU avg system time: {worker_func_cpu_system_time}')
+    print(f'CPU avg user time: {worker_func_cpu_user_time}')
+    print(f'CPU avg total time: {worker_func_cpu_total_time}')
+    print(f'Net i/o avg sent: {worker_func_sent_net_io}')
+    print(f'Net i/o avg received: {worker_func_recv_net_io}')
+
+
 def upload_if_needed(storage, src, target_bucket, target_prefix=None):
     example_prefix = 'cos://embl-datasets/'
     if src.startswith(example_prefix):

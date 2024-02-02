@@ -7,7 +7,7 @@ from concurrent.futures.thread import ThreadPoolExecutor
 
 from annotation_pipeline.formula_parser import safe_generate_ion_formula
 from annotation_pipeline.molecular_db import DECOY_ADDUCTS
-from annotation_pipeline.utils import logger, PipelineStats, serialise, deserialise, read_cloud_object_with_retry
+from annotation_pipeline.utils import logger, PipelineStats, serialise, deserialise, read_cloud_object_with_retry, display_stats
 
 
 def _get_random_adduct_set(size, adducts, offset):
@@ -78,6 +78,7 @@ def build_fdr_rankings(pw, config_ds, config_db, mol_dbs_cobjects, formula_to_id
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
 
+    display_stats(futures)
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(futures))
 
     rankings_df = pd.DataFrame(ranking_jobs, columns=['group_i', 'ranking_i', 'database_path', 'modifier', 'adduct'])
@@ -133,6 +134,7 @@ def calculate_fdrs(pw, rankings_df):
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
 
+    display_stats(futures)
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb)
 
     return pd.concat(results)

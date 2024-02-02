@@ -9,7 +9,7 @@ from pyimzml.ImzMLParser import ImzMLParser
 
 from annotation_pipeline.image import choose_ds_segments, read_ds_segment
 from annotation_pipeline.utils import logger, get_pixel_indices, PipelineStats, \
-    serialise, deserialise, read_cloud_object_with_retry, read_ranges_from_url
+    serialise, deserialise, read_cloud_object_with_retry, read_ranges_from_url, display_stats
 from concurrent.futures import ThreadPoolExecutor
 
 MAX_MZ_VALUE = 10 ** 5
@@ -50,6 +50,7 @@ def get_imzml_reader(pw, imzml_cobject):
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
 
+    display_stats(future)
     PipelineStats.append_func(future, memory_mb=memory_capacity_mb, cloud_objects_n=1)
 
     return imzml_reader, imzml_reader_cobject
@@ -136,6 +137,8 @@ def chunk_spectra(pw, ibd_cobject, imzml_reader_cobject, imzml_reader, on_the_fl
         memory_capacity_mb = 3072
         futures = pw.map(upload_chunk, [(i,) for i in range(len(chunks))], runtime_memory=memory_capacity_mb)
         ds_chunks_cobjects = pw.get_result(futures)
+
+        display_stats(futures)
         PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(chunks))
 
         return ds_chunks_cobjects
@@ -168,6 +171,7 @@ def define_ds_segments(pw, ibd_cobject, imzml_reader_cobject, ds_segm_size_mb, s
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
 
+    display_stats(future)
     PipelineStats.append_func(future, memory_mb=memory_capacity_mb)
     return ds_segments
 
@@ -220,6 +224,8 @@ def segment_spectra(pw, ds_chunks_cobjects, ds_segments_bounds, ds_segm_size_mb,
     print(f'Time: {elapsed}')
 
     if not isinstance(first_futures, list): first_futures = [first_futures]
+
+    display_stats(first_futures)
     PipelineStats.append_func(first_futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(first_futures) * len(ds_segments_bounds))
 
     def merge_spectra_chunk_segments(segm_cobjects, id, storage):
@@ -266,6 +272,8 @@ def segment_spectra(pw, ds_chunks_cobjects, ds_segments_bounds, ds_segm_size_mb,
 
     ds_segms_len = list(np.concatenate(ds_segms_len))
     ds_segms_cobjects = list(np.concatenate(ds_segms_cobjects))
+
+    display_stats(second_futures)
     PipelineStats.append_func(second_futures, memory_mb=memory_capacity_mb, cloud_objects_n=ds_segm_n)
 
     assert len(ds_segms_cobjects) == len(set(co.key for co in ds_segms_cobjects)), 'Duplicate CloudObjects in ds_segms_cobjects'
@@ -295,6 +303,7 @@ def clip_centr_df(pw, peaks_cobjects, mz_min, mz_max):
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
 
+    display_stats(futures)
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(futures))
 
     clip_centr_chunks_cobjects = list(clip_centr_chunks_cobjects)
@@ -319,6 +328,7 @@ def define_centr_segments(pw, clip_centr_chunks_cobjects, centr_n, ds_segm_n, ds
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
 
+    display_stats(futures)
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb)
 
     ds_size_mb = ds_segm_n * ds_segm_size_mb
@@ -376,6 +386,7 @@ def segment_centroids(pw, clip_centr_chunks_cobjects, centr_segm_lower_bounds, d
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
 
+    display_stats(first_futures)
     PipelineStats.append_func(first_futures, memory_mb=memory_capacity_mb,
                                 cloud_objects_n=len(first_futures) * len(centr_segm_lower_bounds))
 
@@ -453,6 +464,7 @@ def segment_centroids(pw, clip_centr_chunks_cobjects, centr_segm_lower_bounds, d
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
 
+    display_stats(second_futures)
     PipelineStats.append_func(second_futures, memory_mb=memory_capacity_mb, cloud_objects_n=centr_segm_n)
 
     assert len(db_segms_cobjects) == len(set(co.key for co in db_segms_cobjects)), 'Duplicate CloudObject key in db_segms_cobjects'
@@ -491,6 +503,9 @@ def validate_centroid_segments(pw, db_segms_cobjects, ds_segms_bounds, ppm):
 
     futures = pw.map(get_segm_stats, [(co,) for co in db_segms_cobjects], runtime_memory=1024)
     results = pw.get_result(futures)
+
+    display_stats(futures)
+
     segm_formula_is = [formula_is for formula_is, stats in results]
     stats_df = pd.DataFrame([stats for formula_is, stats in results])
 

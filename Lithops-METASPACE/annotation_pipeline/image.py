@@ -5,7 +5,7 @@ import pandas as pd
 from scipy.sparse import coo_matrix
 from concurrent.futures import ThreadPoolExecutor
 import time as time
-from annotation_pipeline.utils import ds_dims, get_pixel_indices, serialise, deserialise, read_cloud_object_with_retry, PipelineStats
+from annotation_pipeline.utils import ds_dims, get_pixel_indices, serialise, deserialise, read_cloud_object_with_retry, PipelineStats, display_stats
 from annotation_pipeline.validate import make_compute_image_metrics, formula_image_metrics
 ISOTOPIC_PEAK_N = 4
 
@@ -275,6 +275,7 @@ def get_target_images(pw, images_cloud_objs, imzml_reader, targets, as_png=True,
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
 
+    display_stats(futures)
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb)
 
     return all_images

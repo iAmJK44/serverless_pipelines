@@ -5,7 +5,7 @@ import hashlib
 import math
 import time as time
 from annotation_pipeline.formula_parser import safe_generate_ion_formula
-from annotation_pipeline.utils import logger, PipelineStats, serialise, deserialise, read_cloud_object_with_retry
+from annotation_pipeline.utils import logger, PipelineStats, serialise, deserialise, read_cloud_object_with_retry, display_stats
 
 DECOY_ADDUCTS = ['+He', '+Li', '+Be', '+B', '+C', '+N', '+O', '+F', '+Ne', '+Mg', '+Al', '+Si', '+P', '+S', '+Cl', '+Ar', '+Ca', '+Sc', '+Ti', '+V', '+Cr', '+Mn', '+Fe', '+Co', '+Ni', '+Cu', '+Zn', '+Ga', '+Ge', '+As', '+Se', '+Br', '+Kr', '+Rb', '+Sr', '+Y', '+Zr', '+Nb', '+Mo', '+Ru', '+Rh', '+Pd', '+Ag', '+Cd', '+In', '+Sn', '+Sb', '+Te', '+I', '+Xe', '+Cs', '+Ba', '+La', '+Ce', '+Pr', '+Nd', '+Sm', '+Eu', '+Gd', '+Tb', '+Dy', '+Ho', '+Ir', '+Th', '+Pt', '+Os', '+Yb', '+Lu', '+Bi', '+Pb', '+Re', '+Tl', '+Tm', '+U', '+W', '+Au', '+Er', '+Hf', '+Hg', '+Ta']
 N_FORMULAS_SEGMENTS = 256
@@ -66,8 +66,9 @@ def build_database(pw, db_config, mols_dbs_cobjects):
     for cobjects_dict in results:
         for chunk_i, cobject in cobjects_dict.items():
             chunk_cobjects[chunk_i].append(cobject)
-    PipelineStats.append_func(futures, memory_mb=memory_capacity_mb,
-                                cloud_objects_n=sum(map(len, chunk_cobjects)))
+    
+    display_stats(futures)
+    PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=sum(map(len, chunk_cobjects)))
 
     def deduplicate_formulas_chunk(chunk_i, chunk_cobjects, storage):
         print(f'Deduplicating formulas chunk {chunk_i}')
@@ -208,6 +209,8 @@ def calculate_centroids(pw, formula_cobjects, ds_config):
     results = pw.get_result(futures)
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
+
+    display_stats(futures)
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(futures))
 
     num_centroids = sum(count for cobj, count in results)

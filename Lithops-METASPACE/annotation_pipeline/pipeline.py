@@ -14,7 +14,7 @@ from annotation_pipeline.segment import define_ds_segments, chunk_spectra, segme
     clip_centr_df, define_centr_segments, get_imzml_reader, validate_centroid_segments, validate_ds_segments
 from annotation_pipeline.cache import PipelineCacher
 from annotation_pipeline.segment_ds_vm import load_and_split_ds_vm
-from annotation_pipeline.utils import PipelineStats, logger, upload_if_needed
+from annotation_pipeline.utils import PipelineStats, logger, upload_if_needed, display_stats
 from lithops.storage import Storage
 from lithops.config import default_config
 
@@ -333,6 +333,8 @@ class Pipeline:
 
             self.formula_metrics_df = pd.concat(formula_metrics_list)
             self.images_cloud_objs = list(chain(*images_cloud_objs))
+
+            display_stats(futures)
             PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(self.images_cloud_objs))
             logger.info(f'Metrics calculated: {self.formula_metrics_df.shape[0]}')
             self.cacher.save((self.formula_metrics_df, self.images_cloud_objs), cache_key)
