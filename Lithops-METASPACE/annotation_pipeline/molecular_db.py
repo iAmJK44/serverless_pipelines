@@ -67,7 +67,7 @@ def build_database(pw, db_config, mols_dbs_cobjects):
         for chunk_i, cobject in cobjects_dict.items():
             chunk_cobjects[chunk_i].append(cobject)
     
-    display_stats(futures)
+    display_stats(futures, '0_faas')
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=sum(map(len, chunk_cobjects)))
 
     def deduplicate_formulas_chunk(chunk_i, chunk_cobjects, storage):
@@ -210,7 +210,7 @@ def calculate_centroids(pw, formula_cobjects, ds_config):
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
 
-    display_stats(futures)
+    display_stats(futures, '1_faas')
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(futures))
 
     num_centroids = sum(count for cobj, count in results)

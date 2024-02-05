@@ -275,7 +275,7 @@ def get_target_images(pw, images_cloud_objs, imzml_reader, targets, as_png=True,
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
 
-    display_stats(futures)
+    display_stats(futures, 'get_target_images-faas')
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb)
 
     return all_images

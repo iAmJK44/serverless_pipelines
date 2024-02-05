@@ -334,7 +334,7 @@ class Pipeline:
             self.formula_metrics_df = pd.concat(formula_metrics_list)
             self.images_cloud_objs = list(chain(*images_cloud_objs))
 
-            display_stats(futures)
+            display_stats(futures, 'annotate_faas')
             PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(self.images_cloud_objs))
             logger.info(f'Metrics calculated: {self.formula_metrics_df.shape[0]}')
             self.cacher.save((self.formula_metrics_df, self.images_cloud_objs), cache_key)
