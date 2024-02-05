@@ -67,7 +67,7 @@ def build_database(pw, db_config, mols_dbs_cobjects):
         for chunk_i, cobject in cobjects_dict.items():
             chunk_cobjects[chunk_i].append(cobject)
     
-    display_stats(futures, '0_faas')
+    display_stats(futures, 'build_database1-faas')
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=sum(map(len, chunk_cobjects)))
 
     def deduplicate_formulas_chunk(chunk_i, chunk_cobjects, storage):
@@ -90,6 +90,8 @@ def build_database(pw, db_config, mols_dbs_cobjects):
     formulas_nums = pw.get_result(futures)
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
+
+    display_stats(futures, 'build_database2-faas')
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb)
 
     def store_formulas_segments(chunk_i, chunk_cobjects, storage):
@@ -123,6 +125,8 @@ def build_database(pw, db_config, mols_dbs_cobjects):
     print(f'Time: {elapsed}')
 
     formula_cobjects = [segm for segms in results for segm in segms]
+
+    display_stats(futures, 'build_database3-faas')
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb,
                                 cloud_objects_n=len(formula_cobjects))
 
@@ -161,6 +165,7 @@ def build_database(pw, db_config, mols_dbs_cobjects):
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
 
+    display_stats(futures, 'build_database4-faas')
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=n_formula_to_id)
     logger.info(f'Built {n_formula_to_id} formula_to_id dictionaries chunks')
 
@@ -210,7 +215,7 @@ def calculate_centroids(pw, formula_cobjects, ds_config):
     elapsed = time.time() - st
     print(f'Time: {elapsed}')
 
-    display_stats(futures, '1_faas')
+    display_stats(futures, 'calculate_centroids-faas')
     PipelineStats.append_func(futures, memory_mb=memory_capacity_mb, cloud_objects_n=len(futures))
 
     num_centroids = sum(count for cobj, count in results)
