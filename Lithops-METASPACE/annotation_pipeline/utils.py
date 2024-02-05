@@ -70,18 +70,42 @@ class PipelineStats:
         return stats
 
 
-def display_stats(futures):
+def display_stats(futures, stage):
+    if not isinstance(futures, list):
+        futures = [futures]
+        
     stats = [f.stats for f in futures]
-
-    worker_func_cpu_usage = np.mean([stat['worker_func_cpu_usage'] for stat in stats])
+    
+    worker_func_cpu_usage_values = [stat['worker_func_cpu_usage'] for stat in stats]
+    worker_func_cpu_usage = np.mean(worker_func_cpu_usage_values)
+    worker_func_cpu_usage_std = np.std(worker_func_cpu_usage_values)
+    
     worker_func_cpu_system_time = np.mean([stat['worker_func_cpu_system_time'] for stat in stats])
     worker_func_cpu_user_time = np.mean([stat['worker_func_cpu_user_time'] for stat in stats])
     worker_func_cpu_total_time = np.mean([stat['worker_func_cpu_total_time'] for stat in stats])
-
+    
     worker_func_sent_net_io = sum([stat['worker_func_sent_net_io'] for stat in stats])
     worker_func_recv_net_io = sum([stat['worker_func_recv_net_io'] for stat in stats])
-
+    
+    stats_dict = {
+        'CPU_avg_usage': worker_func_cpu_usage,
+        'CPU_avg_usage_std': worker_func_cpu_usage_std,
+        'CPU_avg_usage_values': worker_func_cpu_usage_values,
+        'CPU_avg_system_time': worker_func_cpu_system_time,
+        'CPU_avg_user_time': worker_func_cpu_user_time,
+        'CPU_avg_total_time': worker_func_cpu_total_time,
+        'Net_io_avg_sent': worker_func_sent_net_io,
+        'Net_io_avg_received': worker_func_recv_net_io
+    }
+    
+    # Save the dictionary to a pickle file
+    with open(f'stats_{stage}.pickle', 'wb') as pickle_file:
+        pickle.dump(stats_dict, pickle_file)
+    
+    # Print the statistics
+    print(f'CPU usage values: {worker_func_cpu_usage_values}')
     print(f'CPU avg usage: {worker_func_cpu_usage}')
+    print(f'CPU avg usage std: {worker_func_cpu_usage_std}')
     print(f'CPU avg system time: {worker_func_cpu_system_time}')
     print(f'CPU avg user time: {worker_func_cpu_user_time}')
     print(f'CPU avg total time: {worker_func_cpu_total_time}')
