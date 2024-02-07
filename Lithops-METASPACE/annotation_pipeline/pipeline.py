@@ -41,11 +41,12 @@ class Pipeline:
 
         lithops_mode = self.config['lithops']['mode']
 
+        lithops_bucket = self.config['lithops']['storage_bucket']
+        self.ds_bucket = self.config.get('storage', {}).get('ds_bucket', lithops_bucket)
+
         if lithops_mode == 'serverless':
             serverless_backend = self.config['serverless']['backend']
             serverless_runtime = self.config['serverless']['runtime']
-            lithops_bucket = self.config['lithops']['storage_bucket']
-            self.ds_bucket = self.config.get('storage', {}).get('ds_bucket', lithops_bucket)
 
             if self.hybrid_impl:
                 self.lithops_executor = lithops.FunctionExecutor(backend=serverless_backend, execution_role='arn:aws:iam::776724236183:role/LithopsExecutionRole', region_name= 'us-east-1', runtime_memory=2048, runtime=serverless_runtime)
@@ -55,7 +56,6 @@ class Pipeline:
         elif lithops_mode == 'localhost':
             self.lithops_executor = lithops.FunctionExecutor(config=self.config, runtime_memory=2048)
             self.lithops_vm_executor = lithops.FunctionExecutor(config=self.config, runtime_memory=2048)
-            lithops_bucket = 'foo'
 
         self.storage = Storage(config=self.config)
 
