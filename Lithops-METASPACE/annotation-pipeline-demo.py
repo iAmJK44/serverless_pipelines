@@ -30,8 +30,8 @@ lithops.__version__
 import json
 
 # Input dataset and database (increase/decrease config number to increase/decrease job size)
-input_ds = json.load(open('metabolomics/ds_config5.json'))
-input_db = json.load(open('metabolomics/db_config2.json'))
+input_ds = json.load(open('metabolomics/ds_config1.json'))
+input_db = json.load(open('metabolomics/db_config1.json'))
 
 print(input_ds)
 print(input_db)
