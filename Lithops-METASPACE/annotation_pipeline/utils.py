@@ -71,7 +71,7 @@ class PipelineStats:
 
 
 def display_stats(futures, stage):
-    if not isinstance(futures, list):
+    '''if not isinstance(futures, list):
         futures = [futures]
         
     stats = [f.stats for f in futures]
@@ -110,7 +110,7 @@ def display_stats(futures, stage):
     print(f'CPU avg user time: {worker_func_cpu_user_time}')
     print(f'CPU avg total time: {worker_func_cpu_total_time}')
     print(f'Net i/o avg sent: {worker_func_sent_net_io}')
-    print(f'Net i/o avg received: {worker_func_recv_net_io}')
+    print(f'Net i/o avg received: {worker_func_recv_net_io}')'''
 
 
 def upload_if_needed(storage, src, target_bucket, target_prefix=None):
