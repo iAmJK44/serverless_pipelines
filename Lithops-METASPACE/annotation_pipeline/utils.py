@@ -71,6 +71,7 @@ class PipelineStats:
 
 
 def display_stats(futures, stage):
+    # TODO: Check log_level
     '''if not isinstance(futures, list):
         futures = [futures]
         
