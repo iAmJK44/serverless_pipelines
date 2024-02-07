@@ -49,7 +49,7 @@ pipeline = Pipeline(
     use_ds_cache=False, use_db_cache=False,
     # Set to 'auto' to used the hybrid Serverless+VM implementation when available,
     # True to force Hybrid mode, or False to force pure Serverless mode.
-    hybrid_impl='False'
+    hybrid_impl='auto'
 )
 
 ### DATABASE PREPROCESSING ###
