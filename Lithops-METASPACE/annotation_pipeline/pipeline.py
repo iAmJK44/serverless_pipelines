@@ -54,8 +54,7 @@ class Pipeline:
                 self.lithops_executor = lithops.FunctionExecutor(config=self.config, runtime_memory=2048, runtime=serverless_runtime, log_level='INFO')
         elif lithops_mode == 'localhost':
             self.lithops_executor = lithops.FunctionExecutor(config=self.config, runtime_memory=2048)
-            localhost_runtime = self.config['lithops']['runtime']
-            self.lithops_vm_executor = lithops.FunctionExecutor(config=self.config, runtime=localhost_runtime, runtime_memory=2048)
+            self.lithops_vm_executor = lithops.FunctionExecutor(config=self.config, runtime_memory=2048)
             lithops_bucket = 'foo'
 
         self.storage = Storage(config=self.config)
