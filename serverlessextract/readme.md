@@ -7,8 +7,8 @@ In this pipeline we perform radio interferomic data processing carrying out all 
 To execute this notebook you need:
    - An AWS Account.
    - Setup Lithops to work with AWS Lambda.
-   - Lithops version: 3.1.0
-   - Python 3.10
+   - Lithops version: 2.9.0
+   - Python 3.8
 
 ## Setup
 1. Clone this github and install the requirements in [`requirements.txt`](requirements.txt):

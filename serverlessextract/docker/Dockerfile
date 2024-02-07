@@ -1,5 +1,5 @@
-# Python 3.8
-FROM python:3.10
+# Python 3.10
+FROM python:3.10-slim-buster
 
 RUN apt-get update \
 	# Install necessary dependencies
