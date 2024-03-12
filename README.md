@@ -1,4 +1,4 @@
-# Extreme Data Serverless Benchmarks
+# Elastic Data Serverless Benchmarks
 
 This repository contains a summary of serverless benchmarks and pipelines designed to measure the performance of serverless architectures like Lithops.
 | Benchmark   | Description     | Language | Stages |     Data set     |     Data format     | LOC |
