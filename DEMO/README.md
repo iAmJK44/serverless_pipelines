@@ -1,6 +1,6 @@
 # DEMO: Serverless Elastic Benchmarks
 
-This DEMO is prepared to perfrom small runs of all Serverless Elastic Benchmarks. There is a public AWS AMI with all the necessary requirements installed and prepared to run the benchmarks. In addition, we also have a public AWS S3 bucket with the necessary data required by the benchmarks that is not stored in the AMI. On the other hand, the necessary runtimes for Lithops benchmarks are deployed previously as public Docker containers in Docker Hub ([runtime1](https://hub.docker.com/r/jordi44/serverless-benchmarks), [runtime2](https://hub.docker.com/r/jordi44/variant-calling), [runtime3](https://hub.docker.com/r/jordi44/model-calculation)).
+This DEMO is prepared to perfrom small runs of all Serverless Elastic Benchmarks. There is a public AWS AMI with all the necessary requirements installed and prepared to run the benchmarks. In addition, we also have a public AWS S3 bucket with the necessary data required by the benchmarks that is not stored in the AMI. On the other hand, the necessary runtimes for Lithops benchmarks are deployed previously as public Docker containers in Docker Hub ([runtime1](https://hub.docker.com/r/jordi44/serverless-benchmarks), [runtime2](https://hub.docker.com/r/jordi44/variant-calling), [runtime3](https://hub.docker.com/r/jordi44/model-calculation), [runtime4](https://hub.docker.com/r/jordi44/water-consumption)).
 
 The scripts used in this tutorial are stored in `/home/ubuntu/` directory of the AMI.
 
