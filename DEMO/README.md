@@ -44,7 +44,8 @@ The scripts used in this tutorial are stored in `/home/ubuntu/` directory of the
       ``` 
       ```
       $ ./run_benchmark --benchmark all
-      ``` 
+      ```
+   In case that more space in EBS is needed you can just increase it following this [instructions](https://repost.aws/knowledge-center/expand-ebs-root-volume-windows).
 
 **Note:** Additionally, the `build_runtimes.sh` scripts allows you to build all the runtimes and AWS Lambda functions instead of using the docker images deployed in `deploy_runtimes.sh` script. However, this step will take a long time. Before running it, you should comment the lines tha perform `docker push` in case you dont want to upload the docker images to your Docker Hub account. You can use it as follows:
   ```
